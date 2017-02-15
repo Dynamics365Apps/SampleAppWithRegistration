@@ -1,0 +1,21 @@
+OBJECT Modification "HW App Subs"(Codeunit 50003)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=;
+    Time=;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    Target="HW App Subs"(Codeunit 50003);
+    ChangeType=Deletion;
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

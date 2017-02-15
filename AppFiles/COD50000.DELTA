@@ -1,0 +1,78 @@
+OBJECT Codeunit 50000 HW SayHelloWorld Meth
+{
+  OBJECT-PROPERTIES
+  {
+    Date=15/02/17;
+    Time=[ 9:30:45];
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+    VAR
+      HWAppPermissionsMeth@90000 : Codeunit 50006;
+      Object@90001 : Record 2000000001;
+
+    [EventSubscriber(Page,21,OnAfterActionEvent,"Say Hello World")]
+    LOCAL PROCEDURE SayHelloWorldOnCustCardAction@4(VAR Rec@1000 : Record 18);
+    BEGIN
+      IF HWAppPermissionsMeth.CheckAccessAndNotifyUser('PAG21',FALSE) THEN
+        SayHelloWorldCust(Rec);
+    END;
+
+    [EventSubscriber(Page,22,OnAfterActionEvent,"Say Hello World")]
+    LOCAL PROCEDURE SayHelloWorldOnCustListAction@3(VAR Rec@1000 : Record 18);
+    BEGIN
+      IF HWAppPermissionsMeth.CheckAccessAndNotifyUser('PAG22',FALSE) THEN
+        SayHelloWorldCust(Rec);
+    END;
+
+    PROCEDURE SayHelloWorldCust@1(VAR Customer@1000 : Record 18);
+    BEGIN
+      DoSayHelloWorldCust(Customer);
+    END;
+
+    LOCAL PROCEDURE DoSayHelloWorldCust@2(VAR Customer@1001 : Record 18);
+    VAR
+      HelloWorld@1000 : Record 50000;
+    BEGIN
+      MESSAGE('%1, %2', HelloWorld.GetRandomGreeting(), Customer.Name);
+    END;
+
+    [EventSubscriber(Page,26,OnAfterActionEvent,"Say Hello World")]
+    LOCAL PROCEDURE SayHelloWorldOnVendorCardAction@90003(VAR Rec@90000 : Record 23);
+    BEGIN
+      IF HWAppPermissionsMeth.CheckAccessAndNotifyUser('PAG25',FALSE) THEN
+        SayHelloWorldVendor(Rec);
+    END;
+
+    [EventSubscriber(Page,27,OnAfterActionEvent,"Say Hello World")]
+    LOCAL PROCEDURE SayHelloWorldOnVendorListAction@90002(VAR Rec@90000 : Record 23);
+    BEGIN
+      IF HWAppPermissionsMeth.CheckAccessAndNotifyUser('PAG26',FALSE) THEN
+        SayHelloWorldVendor(Rec);
+    END;
+
+    PROCEDURE SayHelloWorldVendor@90001(VAR Vendor@1000 : Record 23);
+    BEGIN
+      DoSayHelloWorldVendor(Vendor);
+    END;
+
+    LOCAL PROCEDURE DoSayHelloWorldVendor@90000(VAR Vendor@1001 : Record 23);
+    VAR
+      HelloWorld@1000 : Record 50000;
+    BEGIN
+      MESSAGE('%1, %2', HelloWorld.GetRandomGreeting(), Vendor.Name);
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

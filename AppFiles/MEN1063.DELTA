@@ -1,0 +1,35 @@
+OBJECT MenuSuite 1063 HW Hello World
+{
+  OBJECT-PROPERTIES
+  {
+    Date=03/02/17;
+    Time=14:36:31;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+  }
+  MENUNODES
+  {
+    {                ;[{A07A2127-D15F-4AF6-8301-EC0DA819FAE6}] ;NextNodeID=[{95290DF7-85F4-4617-A68F-43ACA71605E0}] }
+    { MenuGroup      ;[{95290DF7-85F4-4617-A68F-43ACA71605E0}] ;Name=Hello World;
+                                                                CaptionML=ENU=Hello World;
+                                                                MemberOfMenu=[{19A352FE-D90D-424E-B85F-CF3B8E98CF0E}];
+                                                                ParentNodeID=[{28B406BE-DD89-43EC-B2B9-6BB90DC2583B}];
+                                                                Visible=Yes;
+                                                                NextNodeID=[{00000000-0000-0000-0000-000000000000}];
+                                                                FirstChild=[{0FB13674-E873-4740-A526-C2B7B37903C0}] }
+    { MenuItem       ;[{0FB13674-E873-4740-A526-C2B7B37903C0}] ;Name=Hello Worlds;
+                                                                CaptionML=ENU=Hello Worlds;
+                                                                ApplicationArea=;
+                                                                MemberOfMenu=[{19A352FE-D90D-424E-B85F-CF3B8E98CF0E}];
+                                                                RunObjectType=Page;
+                                                                RunObjectID=50000;
+                                                                ParentNodeID=[{95290DF7-85F4-4617-A68F-43ACA71605E0}];
+                                                                Visible=Yes;
+                                                                NextNodeID=[{00000000-0000-0000-0000-000000000000}];
+                                                                DepartmentCategory=Administration }
+  }
+}
+

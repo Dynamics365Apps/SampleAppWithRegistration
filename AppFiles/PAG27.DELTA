@@ -1,0 +1,36 @@
+OBJECT Modification "Vendor List"(Page 27)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=14/02/17;
+    Time=13:48:03;
+    Modified=Yes;
+    Version List=NAVW110.00.00.15052,HelloWorld;
+  }
+  PROPERTIES
+  {
+    Target="Vendor List"(Page 27);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Action 1900000004;
+                         ChangedElements=ActionCollection
+                         {
+                           { 90001   ;1   ;Action    ;
+                                           Name=Say Hello World;
+                                           Image=Web }
+                         }
+                          }
+    { PropertyModification;
+                         Property=Version List;
+                         OriginalValue=NAVW110.00.00.15052;
+                         ModifiedValue=NAVW110.00.00.15052,HelloWorld }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

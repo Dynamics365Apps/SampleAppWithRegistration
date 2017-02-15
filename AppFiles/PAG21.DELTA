@@ -1,0 +1,36 @@
+OBJECT Modification "Customer Card"(Page 21)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=14/02/17;
+    Time=13:02:24;
+    Modified=Yes;
+    Version List=NAVW110.00.00.15140,NAVBE10.00.00.15140,HelloWorld;
+  }
+  PROPERTIES
+  {
+    Target="Customer Card"(Page 21);
+  }
+  CHANGES
+  {
+    { Insertion         ;InsertAfter=Action 1900000004;
+                         ChangedElements=ActionCollection
+                         {
+                           { 90000   ;1   ;Action    ;
+                                           Name=Say Hello World;
+                                           Image=Web }
+                         }
+                          }
+    { PropertyModification;
+                         Property=Version List;
+                         OriginalValue=NAVW110.00.00.15140,NAVBE10.00.00.15140;
+                         ModifiedValue=NAVW110.00.00.15140,NAVBE10.00.00.15140,HelloWorld }
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

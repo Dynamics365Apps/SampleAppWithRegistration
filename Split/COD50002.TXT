@@ -1,0 +1,205 @@
+OBJECT Codeunit 50002 HW App Class
+{
+  OBJECT-PROPERTIES
+  {
+    Date=15/02/17;
+    Time=[ 9:37:07];
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    SingleInstance=No;
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+    VAR
+      CurrentLevel@1000 : 'NoAccess,Limited,Full';
+      NotificationMessage@1001 : Text;
+      IsInitialized@1003 : Boolean;
+      ErrorWebService@90001 : TextConst 'ENU=An error occurred on checking your app registration. Please contact your vendor for more information.';
+
+    PROCEDURE GetAppId@2() Id : Text;
+    BEGIN
+      Id := '{d2d5fd35-1119-4da7-bdba-5bf030b19b54}';
+      OnGetAppId(Id);
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnGetAppId@50003(VAR Id@50000 : Text);
+    BEGIN
+    END;
+
+    LOCAL PROCEDURE AssertInitialized@9();
+    BEGIN
+      IF NOT IsInitialized THEN
+        CheckAppRegistration;
+
+      IsInitialized := TRUE;
+    END;
+
+    LOCAL PROCEDURE CheckAppRegistration@3();
+    VAR
+      Url@90000 : Text;
+      Json@90006 : Text;
+      HttpWebRequestMgt@90001 : Codeunit 1297;
+      TempBlob@90002 : Record 99008535;
+      Instr@90003 : InStream;
+      HttpStatusCode@90005 : DotNet "'System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.Net.HttpStatusCode";
+      ResponseHeaders@90004 : DotNet "'System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.Collections.Specialized.NameValueCollection";
+      JObject@90007 : DotNet "'Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'.Newtonsoft.Json.Linq.JObject";
+    BEGIN
+      Url := GetCheckRegistrationLink;
+
+      HttpWebRequestMgt.Initialize(Url);
+      HttpWebRequestMgt.DisableUI;
+      HttpWebRequestMgt.SetMethod('GET');
+      HttpWebRequestMgt.SetReturnType('application/json');
+
+      TempBlob.INIT;
+      TempBlob.Blob.CREATEINSTREAM(Instr);
+
+      CurrentLevel := CurrentLevel::NoAccess;
+      NotificationMessage := '';
+
+      IF HttpWebRequestMgt.GetResponse(Instr,HttpStatusCode,ResponseHeaders) THEN BEGIN
+        IF HttpStatusCode.ToString = HttpStatusCode.OK.ToString THEN BEGIN
+          Json := TempBlob.ReadAsText('',TEXTENCODING::UTF8);
+          JObject := JObject.Parse(Json);
+          EVALUATE(CurrentLevel,JObject.GetValue('accessLevel').ToString);
+          NotificationMessage := JObject.GetValue('notification').ToString;
+        END ELSE
+          NotificationMessage := ErrorWebService;
+      END ELSE
+        NotificationMessage := ErrorWebService;
+    END;
+
+    PROCEDURE HasNoAccess@1() : Boolean;
+    BEGIN
+      AssertInitialized;
+      EXIT(CurrentLevel >= CurrentLevel::NoAccess);
+    END;
+
+    PROCEDURE HasLimitedAccess@4() : Boolean;
+    BEGIN
+      AssertInitialized;
+      EXIT(CurrentLevel >= CurrentLevel::Limited);
+    END;
+
+    PROCEDURE HasFullAccess@5() : Boolean;
+    BEGIN
+      AssertInitialized;
+      EXIT(CurrentLevel = CurrentLevel::Full);
+    END;
+
+    PROCEDURE HasNotificationMessage@7() : Boolean;
+    BEGIN
+      AssertInitialized;
+      EXIT(NotificationMessage <> '');
+    END;
+
+    PROCEDURE GetNotificationMessage@6() : Text;
+    BEGIN
+      AssertInitialized;
+      EXIT(NotificationMessage);
+    END;
+
+    PROCEDURE ShowPermissionsNotification@50000();
+    VAR
+      HWAppPermNotificationMeth@50000 : Codeunit 50004;
+    BEGIN
+      HWAppPermNotificationMeth.ShowPermissionsNotification;
+    END;
+
+    PROCEDURE ShowRegistrationNotification@50001();
+    VAR
+      HWAppRegNotificationMeth@50000 : Codeunit 50007;
+    BEGIN
+      HWAppRegNotificationMeth.ShowRegistrationNotification;
+    END;
+
+    LOCAL PROCEDURE GetCheckRegistrationLink@90000() ReturnValue : Text;
+    BEGIN
+      ReturnValue := GetAppRegHost + GetAppCheckRegPath + GetAppRegParameters;
+    END;
+
+    PROCEDURE GetCreateRegistrationLink@50011() ReturnValue : Text;
+    BEGIN
+      ReturnValue := GetAppRegHost + GetAppCreateRegPath + GetAppRegParameters;
+    END;
+
+    LOCAL PROCEDURE GetTenantId@50009() : Text;
+    VAR
+      Url@90000 : Text;
+      Host@90002 : Text;
+      Pos@90003 : Integer;
+      Uri@90001 : DotNet "'System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.Uri";
+    BEGIN
+      Url := GETURL(CLIENTTYPE::Web);
+      Uri := Uri.Uri(Url);
+      Host := Uri.Host;
+      Pos := STRPOS(Host,'.');
+      IF Pos = 0 THEN
+        EXIT(Host)
+      ELSE
+        EXIT(COPYSTR(Host,1,Pos-1));
+    END;
+
+    LOCAL PROCEDURE GetNumberOfActiveUsers@50008() : Integer;
+    VAR
+      UserRec@90000 : Record 2000000120;
+    BEGIN
+      UserRec.SETRANGE(State,UserRec.State::Enabled);
+      UserRec.SETFILTER("License Type",'%1|%2',UserRec."License Type"::"Full User",UserRec."License Type"::"Limited User");
+      EXIT(UserRec.COUNT);
+
+    END;
+
+    LOCAL PROCEDURE GetAppRegHost@50007() URL : Text;
+    BEGIN
+      URL := 'https://helloworlddemoreg.azurewebsites.net/';
+      OnGetAppRegHost(URL);
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnGetAppRegHost@50006(VAR URL@50000 : Text);
+    BEGIN
+    END;
+
+    LOCAL PROCEDURE GetAppCheckRegPath@50015() : Text;
+    BEGIN
+      EXIT('api/CheckRegistration');
+    END;
+
+    LOCAL PROCEDURE GetAppCreateRegPath@50016() : Text;
+    BEGIN
+      EXIT('AppRegistrations/Create');
+    END;
+
+    LOCAL PROCEDURE GetAppRegParameters@50017() Params : Text;
+    BEGIN
+      Params := '?tenantId=%1&appId=%2&CompanyName=%3&numberUsers=%4';
+      Params := STRSUBSTNO(Params,GetTenantId,GetAppId,GetEncodedCompanyName,GetNumberOfActiveUsers);
+      OnGetAppRegParameters(Params);
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnGetAppRegParameters@50018(VAR Params@50000 : Text);
+    BEGIN
+    END;
+
+    LOCAL PROCEDURE GetEncodedCompanyName@50002() : Text;
+    VAR
+      SystemWebHttpUtility@50000 : DotNet "'System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.System.Web.HttpUtility";
+    BEGIN
+      EXIT(SystemWebHttpUtility.UrlEncode(COMPANYNAME));
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

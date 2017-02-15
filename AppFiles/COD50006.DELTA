@@ -1,0 +1,70 @@
+OBJECT Codeunit 50006 HW CheckAccessNotifyUser Meth
+{
+  OBJECT-PROPERTIES
+  {
+    Date=15/02/17;
+    Time=[ 9:33:03];
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    PROCEDURE CheckAccessAndNotifyUser@50000(FeatureID@50003 : Text;Silent@50001 : Boolean) HasAccess : Boolean;
+    VAR
+      Handled@50000 : Boolean;
+    BEGIN
+      OnBeforeCheckAccessAndNotifyUser(FeatureID,Silent,HasAccess,Handled);
+
+      HasAccess := DoCheckAccessAndNotifyUser(FeatureID,Silent,HasAccess,Handled);
+
+      OnAfterCheckAccessAndNotifyUser;
+    END;
+
+    LOCAL PROCEDURE DoCheckAccessAndNotifyUser@1(pFeatureID@1000 : Text;Silent@1002 : Boolean;VAR HasAccess@50001 : Boolean;VAR Handled@50000 : Boolean) AccessAllowed : Boolean;
+    VAR
+      HWFeature@90000 : Record 50001;
+      HWAppClass@90001 : Codeunit 50002;
+    BEGIN
+      IF Handled THEN EXIT(HasAccess);
+
+      WITH HWFeature DO BEGIN
+        IF GET(pFeatureID) THEN BEGIN
+          CASE "Access Level" OF
+            "Access Level"::Free: AccessAllowed := TRUE;
+            "Access Level"::Limited: AccessAllowed := HWAppClass.HasLimitedAccess;
+            "Access Level"::Full: AccessAllowed := HWAppClass.HasFullAccess;
+          END;
+        END
+        ELSE BEGIN
+          AccessAllowed := TRUE;
+        END;
+      END;
+
+      IF NOT AccessAllowed THEN BEGIN
+        IF NOT Silent THEN
+          HWAppClass.ShowPermissionsNotification;
+      END;
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnBeforeCheckAccessAndNotifyUser@50001(FeatureID@50003 : Text;Silent@50001 : Boolean;VAR HasAccess@50004 : Boolean;VAR Handled@50000 : Boolean);
+    BEGIN
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnAfterCheckAccessAndNotifyUser@50002();
+    BEGIN
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

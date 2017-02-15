@@ -1,0 +1,21 @@
+OBJECT Modification "HW HelloWorld Data Mgt"(Codeunit 50009)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=;
+    Time=;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    Target="HW HelloWorld Data Mgt"(Codeunit 50009);
+    ChangeType=Deletion;
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+
