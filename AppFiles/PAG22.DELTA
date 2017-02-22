@@ -5,7 +5,7 @@ OBJECT Modification "Customer List"(Page 22)
     Date=14/02/17;
     Time=13:47:31;
     Modified=Yes;
-    Version List=NAVW110.00.00.15052,HelloWorld;
+    Version List=NAVW110.0.00.15052,HelloWorld;
   }
   PROPERTIES
   {
@@ -23,8 +23,8 @@ OBJECT Modification "Customer List"(Page 22)
                           }
     { PropertyModification;
                          Property=Version List;
-                         OriginalValue=NAVW110.00.00.15052;
-                         ModifiedValue=NAVW110.00.00.15052,HelloWorld }
+                         OriginalValue=NAVW110.0.00.15052;
+                         ModifiedValue=NAVW110.0.00.15052,HelloWorld }
   }
   CODE
   {

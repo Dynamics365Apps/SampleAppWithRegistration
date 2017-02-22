@@ -155,7 +155,6 @@ OBJECT Codeunit 50002 HW App Class
       UserRec.SETRANGE(State,UserRec.State::Enabled);
       UserRec.SETFILTER("License Type",'%1|%2',UserRec."License Type"::"Full User",UserRec."License Type"::"Limited User");
       EXIT(UserRec.COUNT);
-
     END;
 
     LOCAL PROCEDURE GetAppRegHost@50007() URL : Text;

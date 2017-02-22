@@ -4,7 +4,7 @@ OBJECT Modification "Vendor Card"(Page 26)
   {
     Date=25/10/16;
     Time=12:00:00;
-    Version List=NAVW110.00,NAVBE10.00;
+    Version List=NAVW110.0;
   }
   PROPERTIES
   {
@@ -22,8 +22,8 @@ OBJECT Modification "Vendor Card"(Page 26)
                           }
     { PropertyModification;
                          Property=Version List;
-                         OriginalValue=NAVW110.00,NAVBE10.00,HelloWorld;
-                         ModifiedValue=NAVW110.00,NAVBE10.00 }
+                         OriginalValue=NAVW110.0,HelloWorld;
+                         ModifiedValue=NAVW110.0 }
   }
   CODE
   {

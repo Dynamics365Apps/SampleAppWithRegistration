@@ -5,19 +5,15 @@ OBJECT Page 26 Vendor Card
     Date=14/02/17;
     Time=13:47:52;
     Modified=Yes;
-    Version List=NAVW110.00,NAVBE10.00,HelloWorld;
+    Version List=NAVW110.0,HelloWorld;
   }
   PROPERTIES
   {
-    CaptionML=[ENU=Vendor Card;
-               FRB=Fiche fournisseur;
-               NLB=Leverancier];
+    CaptionML=ENU=Vendor Card;
     SourceTable=Table23;
     PageType=Card;
     RefreshOnActivate=Yes;
-    PromotedActionCategoriesML=[ENU=New,Process,Report,Approve,Request Approval,New Document,Navigate,Incoming Documents;
-                                FRB=Nouveau,Traitement,êtat,Approuver,Demande d'approbation,Nouveau document,Naviguer,Documents entrants;
-                                NLB=Nieuw,Verwerken,Rapporteren,Goedkeuren,Goedkeuring aanvragen,Nieuw document,Navigeren,Inkomende documenten];
+    PromotedActionCategoriesML=ENU=New,Process,Report,Approve,Request Approval,New Document,Navigate,Incoming Documents;
     OnInit=BEGIN
              SetVendorNoVisibilityOnFactBoxes;
 
@@ -58,30 +54,20 @@ OBJECT Page 26 Vendor Card
       { 1900000003;0 ;ActionContainer;
                       ActionContainerType=RelatedInformation }
       { 64      ;1   ;ActionGroup;
-                      CaptionML=[ENU=Ven&dor;
-                                 FRB=Fo&urnisseur;
-                                 NLB=Leveran&cier];
+                      CaptionML=ENU=Ven&dor;
                       Image=Vendor }
       { 184     ;2   ;Action    ;
                       ShortCutKey=Shift+Ctrl+D;
-                      CaptionML=[ENU=Dimensions;
-                                 FRB=Axes analytiques;
-                                 NLB=Dimensies];
-                      ToolTipML=[ENU=View or edits dimensions, such as area, project, or department, that you can assign to sales and purchase documents to distribute costs and analyze transaction history.;
-                                 FRB=Affichez ou modifiez les axes analytiques, tels que la zone, le projet ou le dÇpartement que vous pouvez affecter aux documents vente et achat afin de distribuer les coñts et analyser l'historique des transactions.;
-                                 NLB=De dimensies, zoals gebied, project of afdeling, weergeven of bewerken die u kunt toewijzen aan verkoop- en inkoopdocumenten om de kosten te verdelen en de transactiegeschiedenis te analyseren.];
+                      CaptionML=ENU=Dimensions;
+                      ToolTipML=ENU=View or edits dimensions, such as area, project, or department, that you can assign to sales and purchase documents to distribute costs and analyze transaction history.;
                       ApplicationArea=#Suite;
                       RunObject=Page 540;
                       RunPageLink=Table ID=CONST(23),
                                   No.=FIELD(No.);
                       Image=Dimensions }
       { 87      ;2   ;Action    ;
-                      CaptionML=[ENU=Bank Accounts;
-                                 FRB=Comptes bancaires;
-                                 NLB=Bankrekeningen];
-                      ToolTipML=[ENU=View or set up the vendor's bank accounts. You can set up any number of bank accounts for each vendor.;
-                                 FRB=Affichez ou configurez les comptes bancaires du fournisseur. Vous pouvez configurer autant de comptes bancaires que vous le souhaitez pour chaque fournisseur.;
-                                 NLB=Bankrekeningen van de leverancier weergeven of instellen. U kunt een willekeurig aantal bankrekeningen instellen voor elke leverancier.];
+                      CaptionML=ENU=Bank Accounts;
+                      ToolTipML=ENU=View or set up the vendor's bank accounts. You can set up any number of bank accounts for each vendor.;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 426;
                       RunPageLink=Vendor No.=FIELD(No.);
@@ -89,12 +75,8 @@ OBJECT Page 26 Vendor Card
       { 14      ;2   ;Action    ;
                       Name=ContactBtn;
                       AccessByPermission=TableData 5050=R;
-                      CaptionML=[ENU=C&ontact;
-                                 FRB=C&ontact;
-                                 NLB=&Contact];
-                      ToolTipML=[ENU=View or edit detailed information about the contact person at the customer.;
-                                 FRB=Affichez ou modifiez des informations dÇtaillÇes concernant la personne Ö contacter chez le client.;
-                                 NLB=Gedetailleerde informatie weergeven of bewerken over de contactpersoon bij de klant.];
+                      CaptionML=ENU=C&ontact;
+                      ToolTipML=ENU=View or edit detailed information about the contact person at the customer.;
                       ApplicationArea=#Basic,#Suite;
                       PromotedIsBig=Yes;
                       Image=ContactPerson;
@@ -105,20 +87,14 @@ OBJECT Page 26 Vendor Card
                                 }
       { 54      ;2   ;Action    ;
                       Name=OrderAddresses;
-                      CaptionML=[ENU=Order &Addresses;
-                                 FRB=&Adresses de commande;
-                                 NLB=&Orderadressen];
-                      ToolTipML=[ENU=View a list of alternate order addresses for the vendor.;
-                                 FRB=Affichez une liste des adresses commande secondaires du fournisseur.;
-                                 NLB=Een lijst weergeven met alternatieve orderadressen voor de leverancier.];
+                      CaptionML=ENU=Order &Addresses;
+                      ToolTipML=ENU=View a list of alternate order addresses for the vendor.;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 369;
                       RunPageLink=Vendor No.=FIELD(No.);
                       Image=Addresses }
       { 68      ;2   ;Action    ;
-                      CaptionML=[ENU=Co&mments;
-                                 FRB=Co&mmentaires;
-                                 NLB=Op&merkingen];
+                      CaptionML=ENU=Co&mments;
                       RunObject=Page 124;
                       RunPageLink=Table Name=CONST(Vendor),
                                   No.=FIELD(No.);
@@ -126,12 +102,8 @@ OBJECT Page 26 Vendor Card
       { 76      ;2   ;Action    ;
                       Name=ApprovalEntries;
                       AccessByPermission=TableData 454=R;
-                      CaptionML=[ENU=Approvals;
-                                 FRB=Approbations;
-                                 NLB=Goedkeuringen];
-                      ToolTipML=[ENU=View a list of the records that are waiting to be approved. For example, you can see who requested the record to be approved, when it was sent, and when it is due to be approved.;
-                                 FRB=Affichez une liste des enregistrements en attente d'approbation. Par exemple, vous pouvez voir qui a demandÇ l'approbation de l'enregistrement, quand il a ÇtÇ envoyÇ et quand son approbation est due.;
-                                 NLB=Een lijst weergeven met de records die wachten op goedkeuring. U kunt bijvoorbeeld zien wie goedkeuring van de record heeft aangevraagd, wanneer de record is verzonden en wanneer deze moet worden goedgekeurd.];
+                      CaptionML=ENU=Approvals;
+                      ToolTipML=ENU=View a list of the records that are waiting to be approved. For example, you can see who requested the record to be approved, when it was sent, and when it is due to be approved.;
                       ApplicationArea=#Suite;
                       Promoted=Yes;
                       Image=Approvals;
@@ -142,9 +114,7 @@ OBJECT Page 26 Vendor Card
                                END;
                                 }
       { 84      ;2   ;Action    ;
-                      CaptionML=[ENU=Cross References;
-                                 FRB=RÇfÇrences externes;
-                                 NLB=Kruisverwijzingen];
+                      CaptionML=ENU=Cross References;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 5723;
                       RunPageView=SORTING(Cross-Reference Type,Cross-Reference Type No.);
@@ -153,12 +123,8 @@ OBJECT Page 26 Vendor Card
                       Image=Change }
       { 225     ;2   ;Action    ;
                       Name=VendorReportSelections;
-                      CaptionML=[ENU=Document Layouts;
-                                 FRB=PrÇsentations document;
-                                 NLB=Documentindelingen];
-                      ToolTipML=[ENU=Set up a layout for different types of documents such as invoices, quotes, and credit memos.;
-                                 FRB=Configurez une prÇsentation pour diffÇrents types de documents tels que des factures, des devis et avoirs.;
-                                 NLB=Een lay-out instellen voor verschillende soorten documenten, zoals facturen, offertes en creditnota's.];
+                      CaptionML=ENU=Document Layouts;
+                      ToolTipML=ENU=Set up a layout for different types of documents such as invoices, quotes, and credit memos.;
                       ApplicationArea=#Basic,#Suite;
                       Image=Quote;
                       OnAction=VAR
@@ -170,129 +136,89 @@ OBJECT Page 26 Vendor Card
                                END;
                                 }
       { 71      ;1   ;ActionGroup;
-                      CaptionML=[ENU=&Purchases;
-                                 FRB=Ac&hats;
-                                 NLB=&Inkoop];
+                      CaptionML=ENU=&Purchases;
                       Image=Purchasing }
       { 118     ;2   ;Action    ;
-                      CaptionML=[ENU=Items;
-                                 FRB=Articles;
-                                 NLB=Artikelen];
+                      CaptionML=ENU=Items;
                       RunObject=Page 297;
                       RunPageView=SORTING(Vendor No.,Item No.);
                       RunPageLink=Vendor No.=FIELD(No.);
                       Image=Item }
       { 73      ;2   ;Action    ;
-                      CaptionML=[ENU=Invoice &Discounts;
-                                 FRB=Remises &facture;
-                                 NLB=&Factuurkorting];
-                      ToolTipML=[ENU=View or set up conditions for invoice discounts and service charges for the vendor.;
-                                 FRB=Affichez ou configurez des conditions de remises facture et de frais forfaitaires pour le fournisseur.;
-                                 NLB=Voorwaarden weergeven of instellen voor factuurkortingen en administratiekosten voor de leverancier.];
+                      CaptionML=ENU=Invoice &Discounts;
+                      ToolTipML=ENU=View or set up conditions for invoice discounts and service charges for the vendor.;
                       ApplicationArea=#Suite;
                       RunObject=Page 28;
                       RunPageLink=Code=FIELD(Invoice Disc. Code);
                       Image=CalculateInvoiceDiscount }
       { 72      ;2   ;Action    ;
-                      CaptionML=[ENU=Prices;
-                                 FRB=Prix;
-                                 NLB=Prijzen];
-                      ToolTipML=[ENU=View or set up different prices for items that you buy from the vendor. An item price is automatically granted on invoice lines when the specified criteria are met, such as vendor, quantity, or ending date.;
-                                 FRB=Affichez ou paramÇtrez des prix diffÇrents pour les articles que vous achetez au fournisseur. Un prix article est automatiquement affectÇ sur les lignes facture lorsque les critäres spÇcifiÇs sont satisfaits, par exemple le fournisseur, la quantitÇ ou la date de fin.;
-                                 NLB=Andere prijzen weergeven of instellen voor artikelen die u van de leverancier koopt. Een artikelprijs wordt automatisch aan factuurregels toegekend als aan de opgegeven criteria wordt voldaan, zoals leverancier, aantallen of einddatum.];
+                      CaptionML=ENU=Prices;
+                      ToolTipML=ENU=View or set up different prices for items that you buy from the vendor. An item price is automatically granted on invoice lines when the specified criteria are met, such as vendor, quantity, or ending date.;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 7012;
                       RunPageView=SORTING(Vendor No.);
                       RunPageLink=Vendor No.=FIELD(No.);
                       Image=Price }
       { 116     ;2   ;Action    ;
-                      CaptionML=[ENU=Line Discounts;
-                                 FRB=Remises ligne;
-                                 NLB=Regelkortingen];
-                      ToolTipML=[ENU=View or set up purchase line discounts.;
-                                 FRB=Affichez ou configurez des remises ligne achat.;
-                                 NLB=Inkoopregelkortingen weergeven of instellen.];
+                      CaptionML=ENU=Line Discounts;
+                      ToolTipML=ENU=View or set up purchase line discounts.;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 7014;
                       RunPageView=SORTING(Vendor No.);
                       RunPageLink=Vendor No.=FIELD(No.);
                       Image=LineDiscount }
       { 129     ;2   ;Action    ;
-                      CaptionML=[ENU=Prepa&yment Percentages;
-                                 FRB=Pourcentages acom&pte;
-                                 NLB=&Vooruitbetalingspercentages];
+                      CaptionML=ENU=Prepa&yment Percentages;
                       RunObject=Page 665;
                       RunPageView=SORTING(Vendor No.);
                       RunPageLink=Vendor No.=FIELD(No.);
                       Image=PrepaymentPercentages }
       { 123     ;2   ;Action    ;
-                      CaptionML=[ENU=S&td. Vend. Purchase Codes;
-                                 FRB=Codes achat fourn. s&td;
-                                 NLB=St&d. lev.-inkoopcodes];
+                      CaptionML=ENU=S&td. Vend. Purchase Codes;
                       RunObject=Page 178;
                       RunPageLink=Vendor No.=FIELD(No.);
                       Image=CodesList }
       { 78      ;2   ;Action    ;
-                      CaptionML=[ENU=Mapping Text to Account;
-                                 FRB=Correspondance texte et compte;
-                                 NLB=Toewijzing van tekst aan rekening];
-                      ToolTipML=[ENU=Page mapping text to account;
-                                 FRB=Correspondance de page Texte et compte;
-                                 NLB=Paginatoewijzing van tekst aan rekening];
+                      CaptionML=ENU=Mapping Text to Account;
+                      ToolTipML=ENU=Page mapping text to account;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 1254;
                       RunPageLink=Vendor No.=FIELD(No.);
                       Image=MapAccounts }
       { 5       ;1   ;ActionGroup;
-                      CaptionML=[ENU=Documents;
-                                 FRB=Documents;
-                                 NLB=Documenten];
+                      CaptionML=ENU=Documents;
                       Image=Administration }
       { 74      ;2   ;Action    ;
-                      CaptionML=[ENU=Quotes;
-                                 FRB=Demandes de prix;
-                                 NLB=Offertes];
+                      CaptionML=ENU=Quotes;
                       RunObject=Page 9306;
                       RunPageView=SORTING(Document Type,Buy-from Vendor No.);
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
                       Image=Quote }
       { 75      ;2   ;Action    ;
-                      CaptionML=[ENU=Orders;
-                                 FRB=Commandes;
-                                 NLB=Orders];
+                      CaptionML=ENU=Orders;
                       RunObject=Page 9307;
                       RunPageView=SORTING(Document Type,Buy-from Vendor No.);
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
                       Image=Document }
       { 99      ;2   ;Action    ;
-                      CaptionML=[ENU=Return Orders;
-                                 FRB=Retours;
-                                 NLB=Retourorders];
+                      CaptionML=ENU=Return Orders;
                       RunObject=Page 9311;
                       RunPageView=SORTING(Document Type,Buy-from Vendor No.);
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
                       Image=ReturnOrder }
       { 21      ;2   ;Action    ;
-                      CaptionML=[ENU=Blanket Orders;
-                                 FRB=Commandes ouvertes;
-                                 NLB=Raamcontracten];
+                      CaptionML=ENU=Blanket Orders;
                       RunObject=Page 9310;
                       RunPageView=SORTING(Document Type,Buy-from Vendor No.);
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
                       Image=BlanketOrder }
       { 7       ;1   ;ActionGroup;
-                      CaptionML=[ENU=History;
-                                 FRB=Historique;
-                                 NLB=Geschiedenis];
+                      CaptionML=ENU=History;
                       Image=History }
       { 70      ;2   ;Action    ;
                       ShortCutKey=Ctrl+F7;
-                      CaptionML=[ENU=Ledger E&ntries;
-                                 FRB=ê&critures comptables;
-                                 NLB=Poste&n];
-                      ToolTipML=[ENU=View the history of transactions that have been posted for the selected record.;
-                                 FRB=Affichez l'historique des transactions qui ont ÇtÇ validÇes pour l'enregistrement sÇlectionnÇ.;
-                                 NLB=De historiek weergeven van transacties die zijn geboekt voor de geselecteerde record.];
+                      CaptionML=ENU=Ledger E&ntries;
+                      ToolTipML=ENU=View the history of transactions that have been posted for the selected record.;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 29;
                       RunPageView=SORTING(Vendor No.)
@@ -303,9 +229,7 @@ OBJECT Page 26 Vendor Card
                       PromotedCategory=Process }
       { 66      ;2   ;Action    ;
                       ShortCutKey=F7;
-                      CaptionML=[ENU=Statistics;
-                                 FRB=Statistiques;
-                                 NLB=Statistiek];
+                      CaptionML=ENU=Statistics;
                       RunObject=Page 152;
                       RunPageLink=No.=FIELD(No.),
                                   Global Dimension 1 Filter=FIELD(Global Dimension 1 Filter),
@@ -314,18 +238,14 @@ OBJECT Page 26 Vendor Card
                       Image=Statistics;
                       PromotedCategory=Process }
       { 69      ;2   ;Action    ;
-                      CaptionML=[ENU=Purchases;
-                                 FRB=Achats;
-                                 NLB=Inkoop];
+                      CaptionML=ENU=Purchases;
                       RunObject=Page 156;
                       RunPageLink=No.=FIELD(No.),
                                   Global Dimension 1 Filter=FIELD(Global Dimension 1 Filter),
                                   Global Dimension 2 Filter=FIELD(Global Dimension 2 Filter);
                       Image=Purchase }
       { 67      ;2   ;Action    ;
-                      CaptionML=[ENU=Entry Statistics;
-                                 FRB=Statistiques Çcritures;
-                                 NLB=Boekingsstatistiek];
+                      CaptionML=ENU=Entry Statistics;
                       RunObject=Page 303;
                       RunPageLink=No.=FIELD(No.),
                                   Date Filter=FIELD(Date Filter),
@@ -333,9 +253,7 @@ OBJECT Page 26 Vendor Card
                                   Global Dimension 2 Filter=FIELD(Global Dimension 2 Filter);
                       Image=EntryStatistics }
       { 20      ;2   ;Action    ;
-                      CaptionML=[ENU=Statistics by C&urrencies;
-                                 FRB=Statistiques par &devise;
-                                 NLB=Statistiek per &valuta];
+                      CaptionML=ENU=Statistics by C&urrencies;
                       RunObject=Page 487;
                       RunPageLink=Vendor Filter=FIELD(No.),
                                   Global Dimension 1 Filter=FIELD(Global Dimension 1 Filter),
@@ -343,9 +261,7 @@ OBJECT Page 26 Vendor Card
                                   Date Filter=FIELD(Date Filter);
                       Image=Currencies }
       { 6500    ;2   ;Action    ;
-                      CaptionML=[ENU=Item &Tracking Entries;
-                                 FRB=&Ecritures traáabilitÇ;
-                                 NLB=Ar&tikeltraceringsposten];
+                      CaptionML=ENU=Item &Tracking Entries;
                       Image=ItemTrackingLedger;
                       OnAction=VAR
                                  ItemTrackingDocMgt@1000 : Codeunit 6503;
@@ -357,9 +273,7 @@ OBJECT Page 26 Vendor Card
                       ActionContainerType=NewDocumentItems }
       { 1903213705;1 ;Action    ;
                       Name=NewBlanketPurchaseOrder;
-                      CaptionML=[ENU=Blanket Purchase Order;
-                                 FRB=Commande ouverte achat;
-                                 NLB=Inkoopraamcontract];
+                      CaptionML=ENU=Blanket Purchase Order;
                       RunObject=Page 509;
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
                       Promoted=No;
@@ -368,9 +282,7 @@ OBJECT Page 26 Vendor Card
                       RunPageMode=Create }
       { 1901469405;1 ;Action    ;
                       Name=NewPurchaseQuote;
-                      CaptionML=[ENU=Purchase Quote;
-                                 FRB=Demande de prix;
-                                 NLB=Ink.-offerte];
+                      CaptionML=ENU=Purchase Quote;
                       RunObject=Page 49;
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
                       Promoted=No;
@@ -379,12 +291,8 @@ OBJECT Page 26 Vendor Card
                       RunPageMode=Create }
       { 1907709505;1 ;Action    ;
                       Name=NewPurchaseInvoice;
-                      CaptionML=[ENU=Purchase Invoice;
-                                 FRB=Facture achat;
-                                 NLB=Ink.-factuur];
-                      ToolTipML=[ENU=Create a new purchase invoice for items or services.;
-                                 FRB=CrÇez une facture achat pour les articles ou les services.;
-                                 NLB=Een nieuwe inkoopfactuur maken voor artikelen of services.];
+                      CaptionML=ENU=Purchase Invoice;
+                      ToolTipML=ENU=Create a new purchase invoice for items or services.;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 51;
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
@@ -395,12 +303,8 @@ OBJECT Page 26 Vendor Card
                       RunPageMode=Create }
       { 1907375405;1 ;Action    ;
                       Name=NewPurchaseOrder;
-                      CaptionML=[ENU=Purchase Order;
-                                 FRB=Commande achat;
-                                 NLB=Ink.-order];
-                      ToolTipML=[ENU=Create a new purchase order.;
-                                 FRB=CrÇez une commande achat.;
-                                 NLB=Een nieuwe inkooporder maken.];
+                      CaptionML=ENU=Purchase Order;
+                      ToolTipML=ENU=Create a new purchase order.;
                       ApplicationArea=#Suite;
                       RunObject=Page 50;
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
@@ -411,12 +315,8 @@ OBJECT Page 26 Vendor Card
                       RunPageMode=Create }
       { 1905024805;1 ;Action    ;
                       Name=NewPurchaseCrMemo;
-                      CaptionML=[ENU=Purchase Credit Memo;
-                                 FRB=Avoir achat;
-                                 NLB=Ink.-creditnota];
-                      ToolTipML=[ENU=Create a new purchase credit memo to revert a posted purchase invoice.;
-                                 FRB=CrÇez un avoir achat pour contrepasser une facture achat validÇe.;
-                                 NLB=Een nieuwe inkoopcreditnota maken om een geboekte inkoopfactuur terug te draaien.];
+                      CaptionML=ENU=Purchase Credit Memo;
+                      ToolTipML=ENU=Create a new purchase credit memo to revert a posted purchase invoice.;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 52;
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
@@ -427,9 +327,7 @@ OBJECT Page 26 Vendor Card
                       RunPageMode=Create }
       { 1904749705;1 ;Action    ;
                       Name=NewPurchaseReturnOrder;
-                      CaptionML=[ENU=Purchase Return Order;
-                                 FRB=Retour achat;
-                                 NLB=Inkoopretourorder];
+                      CaptionML=ENU=Purchase Return Order;
                       RunObject=Page 6640;
                       RunPageLink=Buy-from Vendor No.=FIELD(No.);
                       Promoted=No;
@@ -442,17 +340,11 @@ OBJECT Page 26 Vendor Card
                       Name=Say Hello World;
                       Image=Web }
       { 39      ;1   ;ActionGroup;
-                      CaptionML=[ENU=Approval;
-                                 FRB=Approbation;
-                                 NLB=Goedkeuring] }
+                      CaptionML=ENU=Approval }
       { 37      ;2   ;Action    ;
                       Name=Approve;
-                      CaptionML=[ENU=Approve;
-                                 FRB=Approuver;
-                                 NLB=Goedkeuren];
-                      ToolTipML=[ENU=Approve the requested changes.;
-                                 FRB=Approuvez les modifications requises.;
-                                 NLB=De aangevraagde wijzigingen goedkeuren.];
+                      CaptionML=ENU=Approve;
+                      ToolTipML=ENU=Approve the requested changes.;
                       ApplicationArea=#All;
                       Promoted=Yes;
                       Visible=OpenApprovalEntriesExistCurrUser;
@@ -467,12 +359,8 @@ OBJECT Page 26 Vendor Card
                                 }
       { 35      ;2   ;Action    ;
                       Name=Reject;
-                      CaptionML=[ENU=Reject;
-                                 FRB=Rejeter;
-                                 NLB=Weigeren];
-                      ToolTipML=[ENU=Reject the approval request.;
-                                 FRB=Rejetez la demande d'approbation.;
-                                 NLB=De goedkeuringsaanvraag weigeren.];
+                      CaptionML=ENU=Reject;
+                      ToolTipML=ENU=Reject the approval request.;
                       ApplicationArea=#All;
                       Promoted=Yes;
                       Visible=OpenApprovalEntriesExistCurrUser;
@@ -487,12 +375,8 @@ OBJECT Page 26 Vendor Card
                                 }
       { 33      ;2   ;Action    ;
                       Name=Delegate;
-                      CaptionML=[ENU=Delegate;
-                                 FRB=DÇlÇguer;
-                                 NLB=Delegeren];
-                      ToolTipML=[ENU=Delegate the approval to a substitute approver.;
-                                 FRB=DÇlÇguez l'approbation Ö un approbateur remplaáant.;
-                                 NLB=De goedkeuring delegeren naar een vervangende beoordelaar.];
+                      CaptionML=ENU=Delegate;
+                      ToolTipML=ENU=Delegate the approval to a substitute approver.;
                       ApplicationArea=#All;
                       Promoted=Yes;
                       Visible=OpenApprovalEntriesExistCurrUser;
@@ -506,12 +390,8 @@ OBJECT Page 26 Vendor Card
                                 }
       { 77      ;2   ;Action    ;
                       Name=Comment;
-                      CaptionML=[ENU=Comments;
-                                 FRB=Commentaires;
-                                 NLB=Opmerkingen];
-                      ToolTipML=[ENU=View or add comments.;
-                                 FRB=Affichez ou ajoutez des commentaires.;
-                                 NLB=Opmerkingen weergeven of toevoegen.];
+                      CaptionML=ENU=Comments;
+                      ToolTipML=ENU=View or add comments.;
                       ApplicationArea=#All;
                       Promoted=Yes;
                       Visible=OpenApprovalEntriesExistCurrUser;
@@ -524,18 +404,12 @@ OBJECT Page 26 Vendor Card
                                END;
                                 }
       { 31      ;1   ;ActionGroup;
-                      CaptionML=[ENU=Request Approval;
-                                 FRB=Approbation demande achat;
-                                 NLB=Goedkeuring aanvragen];
+                      CaptionML=ENU=Request Approval;
                       Image=SendApprovalRequest }
       { 29      ;2   ;Action    ;
                       Name=SendApprovalRequest;
-                      CaptionML=[ENU=Send A&pproval Request;
-                                 FRB=Envoyer demande d'a&pprobation;
-                                 NLB=G&oedkeuringsaanvraag verzenden];
-                      ToolTipML=[ENU=Send an approval request.;
-                                 FRB=Envoyez une demande d'approbation.;
-                                 NLB=Een goedkeuringsaanvraag verzenden.];
+                      CaptionML=ENU=Send A&pproval Request;
+                      ToolTipML=ENU=Send an approval request.;
                       ApplicationArea=#Suite;
                       Promoted=Yes;
                       Enabled=NOT OpenApprovalEntriesExist;
@@ -551,12 +425,8 @@ OBJECT Page 26 Vendor Card
                                 }
       { 27      ;2   ;Action    ;
                       Name=CancelApprovalRequest;
-                      CaptionML=[ENU=Cancel Approval Re&quest;
-                                 FRB=Annuler demande d'appro&bation;
-                                 NLB=&Goedkeuringsaanvraag annuleren];
-                      ToolTipML=[ENU=Cancel the approval request.;
-                                 FRB=Annulez la demande d'approbation.;
-                                 NLB=De goedkeuringsaanvraag annuleren.];
+                      CaptionML=ENU=Cancel Approval Re&quest;
+                      ToolTipML=ENU=Cancel the approval request.;
                       ApplicationArea=#Suite;
                       Promoted=Yes;
                       Enabled=CanCancelApprovalForRecord;
@@ -570,18 +440,12 @@ OBJECT Page 26 Vendor Card
                                END;
                                 }
       { 130     ;1   ;ActionGroup;
-                      CaptionML=[ENU=F&unctions;
-                                 FRB=Fonction&s;
-                                 NLB=F&uncties];
+                      CaptionML=ENU=F&unctions;
                       Image=Action }
       { 59      ;2   ;Action    ;
                       Name=Templates;
-                      CaptionML=[ENU=Templates;
-                                 FRB=Modäles;
-                                 NLB=Sjablonen];
-                      ToolTipML=[ENU=View or edit vendor templates.;
-                                 FRB=Affichez ou modifiez des modäles fournisseur.;
-                                 NLB=Leverancierssjablonen weergeven of bewerken.];
+                      CaptionML=ENU=Templates;
+                      ToolTipML=ENU=View or edit vendor templates.;
                       ApplicationArea=#Basic,#Suite;
                       RunObject=Page 1340;
                       RunPageLink=Table ID=CONST(23);
@@ -590,12 +454,8 @@ OBJECT Page 26 Vendor Card
       { 131     ;2   ;Action    ;
                       Name=ApplyTemplate;
                       Ellipsis=Yes;
-                      CaptionML=[ENU=Apply Template;
-                                 FRB=Appliquer modäle;
-                                 NLB=Sjabloon toepassen];
-                      ToolTipML=[ENU=Cancel the approval request.;
-                                 FRB=Annulez la demande d'approbation.;
-                                 NLB=De goedkeuringsaanvraag annuleren.];
+                      CaptionML=ENU=Apply Template;
+                      ToolTipML=ENU=Cancel the approval request.;
                       ApplicationArea=#Basic,#Suite;
                       PromotedIsBig=Yes;
                       Image=ApplyTemplate;
@@ -609,12 +469,8 @@ OBJECT Page 26 Vendor Card
       { 51      ;2   ;Action    ;
                       Name=SaveAsTemplate;
                       Ellipsis=Yes;
-                      CaptionML=[ENU=Save as Template;
-                                 FRB=Sauvegarder comme modäle;
-                                 NLB=Opslaan als sjabloon];
-                      ToolTipML=[ENU=Save the vendor card as a template that can be reused to create new vendor cards. Vendor templates contain preset information to help you fill fields on vendor cards.;
-                                 FRB=Enregistrez la fiche fournisseur comme modäle que vous pourrez rÇutiliser pour crÇer de nouvelles fiches fournisseur. Les modäles fournisseur contiennent des informations prÇdÇfinies pour vous aider Ö complÇter les fiches fournisseur.;
-                                 NLB=De leverancierskaart opslaan als sjabloon die opnieuw kan worden gebruikt om nieuwe leverancierskaarten te maken. Leverancierssjablonen bevatten vooraf ingevulde informatie en helpen u bij het invullen van velden op leverancierskaarten.];
+                      CaptionML=ENU=Save as Template;
+                      ToolTipML=ENU=Save the vendor card as a template that can be reused to create new vendor cards. Vendor templates contain preset information to help you fill fields on vendor cards.;
                       ApplicationArea=#Basic,#Suite;
                       Image=Save;
                       OnAction=VAR
@@ -625,37 +481,25 @@ OBJECT Page 26 Vendor Card
                                 }
       { 1902327104;1 ;Action    ;
                       Ellipsis=Yes;
-                      CaptionML=[ENU=Create Payments;
-                                 FRB=CrÇer paiements;
-                                 NLB=Betalingen maken];
-                      ToolTipML=[ENU=View or edit the payment journal where you can register payments to vendors.;
-                                 FRB=Affichez ou modifiez la feuille paiement oó vous pouvez enregistrer les paiements aux fournisseurs.;
-                                 NLB=Het betalingsdagboek, waar u betalingen aan leveranciers kunt registreren, weergeven of bewerken.];
+                      CaptionML=ENU=Create Payments;
+                      ToolTipML=ENU=View or edit the payment journal where you can register payments to vendors.;
                       RunObject=Page 256;
                       Image=PaymentJournal;
                       PromotedCategory=Process }
       { 1906371704;1 ;Action    ;
-                      CaptionML=[ENU=Purchase Journal;
-                                 FRB=Feuille achat;
-                                 NLB=Inkoopdagboek];
+                      CaptionML=ENU=Purchase Journal;
                       RunObject=Page 254;
                       Promoted=Yes;
                       Image=Journals;
                       PromotedCategory=Process }
       { 63      ;1   ;ActionGroup;
-                      CaptionML=[ENU=Incoming Documents;
-                                 FRB=Documents entrants;
-                                 NLB=Inkomende documenten];
+                      CaptionML=ENU=Incoming Documents;
                       Image=SendApprovalRequest }
       { 65      ;2   ;Action    ;
                       Name=SendToIncomingDocuments;
                       Ellipsis=Yes;
-                      CaptionML=[ENU=Send to Incoming Documents;
-                                 FRB=Envoyer vers Documents entrants;
-                                 NLB=Verzenden naar inkomende documenten];
-                      ToolTipML=[ENU=Send to Incoming Documents;
-                                 FRB=Envoyer vers Documents entrants;
-                                 NLB=Verzenden naar inkomende documenten];
+                      CaptionML=ENU=Send to Incoming Documents;
+                      ToolTipML=ENU=Send to Incoming Documents;
                       ApplicationArea=#Basic,#Suite;
                       Promoted=Yes;
                       Visible=SendToIncomingDocumentVisible;
@@ -670,12 +514,8 @@ OBJECT Page 26 Vendor Card
       { 61      ;2   ;Action    ;
                       Name=SendToOCR;
                       Ellipsis=Yes;
-                      CaptionML=[ENU=Send To OCR;
-                                 FRB=Envoyer Ö OCR;
-                                 NLB=Verzenden naar OCR];
-                      ToolTipML=[ENU=Send To OCR;
-                                 FRB=Envoyer Ö OCR;
-                                 NLB=Verzenden naar OCR];
+                      CaptionML=ENU=Send To OCR;
+                      ToolTipML=ENU=Send To OCR;
                       ApplicationArea=#Basic,#Suite;
                       Promoted=Yes;
                       Visible=SendToOCRVisible;
@@ -690,12 +530,8 @@ OBJECT Page 26 Vendor Card
       { 62      ;2   ;Action    ;
                       Name=SendIncomingDocApprovalRequest;
                       AccessByPermission=TableData 454=I;
-                      CaptionML=[ENU=Send A&pproval Request;
-                                 FRB=Envoyer demande d'a&pprobation;
-                                 NLB=G&oedkeuringsaanvraag verzenden];
-                      ToolTipML=[ENU=Send an approval request.;
-                                 FRB=Envoyez une demande d'approbation.;
-                                 NLB=Een goedkeuringsaanvraag verzenden.];
+                      CaptionML=ENU=Send A&pproval Request;
+                      ToolTipML=ENU=Send an approval request.;
                       ApplicationArea=#Basic,#Suite;
                       Promoted=Yes;
                       Visible=SendIncomingDocApprovalRequestVisible;
@@ -709,12 +545,8 @@ OBJECT Page 26 Vendor Card
       { 1900000006;0 ;ActionContainer;
                       ActionContainerType=Reports }
       { 57      ;1   ;Action    ;
-                      CaptionML=[ENU=Vendor - Summary Aging;
-                                 FRB=Fourn.ˇ: êchÇancier;
-                                 NLB=Leverancier - Open posten];
-                      ToolTipML=[ENU=View a summary of the payables owed to each vendor, divided into three time periods.;
-                                 FRB=Affichez un rÇsumÇ des soldes dus Ö chaque fournisseur, rÇparti sur troisˇpÇriodes.;
-                                 NLB=Een in drie perioden onderverdeeld overzicht van het totaal aan verschuldigde betalingen aan elke leverancier weergeven.];
+                      CaptionML=ENU=Vendor - Summary Aging;
+                      ToolTipML=ENU=View a summary of the payables owed to each vendor, divided into three time periods.;
                       ApplicationArea=#Basic,#Suite;
                       Promoted=No;
                       Image=Report;
@@ -724,9 +556,7 @@ OBJECT Page 26 Vendor Card
                                END;
                                 }
       { 1905916106;1 ;Action    ;
-                      CaptionML=[ENU=Vendor - Labels;
-                                 FRB=Fourn. : êtiquettes;
-                                 NLB=Leverancier - Etiketten];
+                      CaptionML=ENU=Vendor - Labels;
                       Promoted=No;
                       Image=Report;
                       PromotedCategory=Report;
@@ -735,12 +565,8 @@ OBJECT Page 26 Vendor Card
                                END;
                                 }
       { 1904504206;1 ;Action    ;
-                      CaptionML=[ENU=Vendor - Balance to Date;
-                                 FRB=Fourn. : DÇtail Çcr. ouvertes;
-                                 NLB=Leverancier - Saldo t/m datum];
-                      ToolTipML=[ENU=View a detail balance for selected vendors.;
-                                 FRB=Affichez un Grand livre pour les fournisseurs sÇlectionnÇs.;
-                                 NLB=Een gedetailleerd saldo weergeven voor geselecteerde leveranciers.];
+                      CaptionML=ENU=Vendor - Balance to Date;
+                      ToolTipML=ENU=View a detail balance for selected vendors.;
                       ApplicationArea=#Basic,#Suite;
                       Promoted=No;
                       Image=Report;
@@ -757,14 +583,10 @@ OBJECT Page 26 Vendor Card
                 ContainerType=ContentArea }
 
     { 1   ;1   ;Group     ;
-                CaptionML=[ENU=General;
-                           FRB=GÇnÇral;
-                           NLB=Algemeen] }
+                CaptionML=ENU=General }
 
     { 2   ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the number of the vendor. The field is either filled automatically from a defined number series, or you enter the number manually because you have enabled manual number entry in the number-series setup.;
-                           FRB=SpÇcifie le numÇro du fournisseur. Le champ est renseignÇ automatiquement Ö partir d'une souche de numÇros dÇfinie, ou vous saisissez manuellement le numÇro car vous avez activÇ la saisie manuelle de numÇro dans le paramÇtrage de la souche de numÇros.;
-                           NLB=Hiermee wordt het nummer van de leverancier opgegeven. Het veld wordt automatisch gevuld op basis van een gedefinieerde nummerreeks of u voert het nummer handmatig in omdat u handmatig invoeren in de nummerreeksinstellingen hebt ingeschakeld.];
+                ToolTipML=ENU=Specifies the number of the vendor. The field is either filled automatically from a defined number series, or you enter the number manually because you have enabled manual number entry in the number-series setup.;
                 ApplicationArea=#All;
                 SourceExpr="No.";
                 Importance=Additional;
@@ -776,33 +598,25 @@ OBJECT Page 26 Vendor Card
                               }
 
     { 4   ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's name. You can enter a maximum of 30 characters, both numbers and letters.;
-                           FRB=SpÇcifie le nom du fournisseur. Vous pouvez entrer au maximum 30ˇcaractäres, des chiffres et des lettres.;
-                           NLB=Hiermee wordt de naam van de leverancier opgegeven. U kunt maximaal 30 tekens (cijfers en letters) invoeren.];
+                ToolTipML=ENU=Specifies the vendor's name. You can enter a maximum of 30 characters, both numbers and letters.;
                 ApplicationArea=#All;
                 SourceExpr=Name;
                 Importance=Promoted;
                 ShowMandatory=TRUE }
 
     { 24  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies which transactions with the vendor that cannot be posted.;
-                           FRB=SpÇcifie les transactions avec le fournisseur qui ne peuvent pas àtre validÇes.;
-                           NLB=Hiermee wordt opgegeven welke transacties met de leverancier niet kunnen worden geboekt.];
+                ToolTipML=ENU=Specifies which transactions with the vendor that cannot be posted.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr=Blocked }
 
     { 26  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies when the vendor card was last modified.;
-                           FRB=SpÇcifie la date Ö laquelle la fiche fournisseur a ÇtÇ modifiÇe pour la derniäre fois.;
-                           NLB=Hiermee wordt opgegeven wanneer de leverancierskaart het laatst is gewijzigd.];
+                ToolTipML=ENU=Specifies when the vendor card was last modified.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Last Date Modified";
                 Importance=Additional }
 
     { 92  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the total value of your completed purchases from the vendor in the current fiscal year. It is calculated from amounts excluding VAT on all completed purchase invoices and credit memos.;
-                           FRB=SpÇcifie la valeur totale de vos achats terminÇs aupräs du fournisseur au cours de l'exercice comptable en cours. Il est calculÇ Ö partir des montants HT sur toutes les factures achat et avoirs terminÇs.;
-                           NLB=Hiermee wordt de totale waarde van uw voltooide inkopen van de leverancier in het huidige boekjaar opgegeven. Dit wordt berekend op basis van bedragen exclusief btw van alle voltooide inkoopfacturen en creditnota's.];
+                ToolTipML=ENU=Specifies the total value of your completed purchases from the vendor in the current fiscal year. It is calculated from amounts excluding VAT on all completed purchase invoices and credit memos.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Balance (LCY)";
                 OnDrillDown=BEGIN
@@ -811,9 +625,7 @@ OBJECT Page 26 Vendor Card
                              }
 
     { 45  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the total value of your unpaid purchases from the vendor in the current fiscal year. It is calculated from amounts excluding VAT on all open purchase invoices and credit memos.;
-                           FRB=SpÇcifie la valeur totale de vos achats impayÇs aupräs du fournisseur au cours de l'exercice comptable en cours. Il est calculÇ Ö partir des montants HT sur toutes les factures achat et avoirs ouverts.;
-                           NLB=Hiermee wordt de totale waarde van uw onbetaalde inkopen van de leverancier in het huidige boekjaar opgegeven. Dit wordt berekend op basis van bedragen exclusief btw van alle open inkoopfacturen en creditnota's.];
+                ToolTipML=ENU=Specifies the total value of your unpaid purchases from the vendor in the current fiscal year. It is calculated from amounts excluding VAT on all open purchase invoices and credit memos.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Balance Due (LCY)";
                 OnDrillDown=BEGIN
@@ -822,87 +634,63 @@ OBJECT Page 26 Vendor Card
                              }
 
     { 80  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the preferred method of sending documents to this vendor, so that you do not have to select a sending option every time that you post and send a document to the vendor. Documents to this vendor will be sent using the specified sending profile and will override the default document sending profile.;
-                           FRB=SpÇcifie la mÇthode prÇfÇrÇe d'envoi de documents Ö ce fournisseur afin que vous n'ayez pas Ö sÇlectionner une option d'envoi chaque fois que vous validez et envoyez un document Ö ce fournisseur. Les documents seront envoyÇs Ö ce fournisseur en utilisant le profil d'envoi spÇcifiÇ et remplaceront le profil d'envoi de document par dÇfaut.;
-                           NLB=Hiermee wordt de voorkeursmethode opgegeven voor het verzenden van documenten naar deze leverancier, zodat u niet steeds een verzendoptie hoeft te selecteren wanneer u een document boekt en naar de leverancier verzendt. Documenten worden naar deze leverancier verzonden met behulp van het opgegeven verzendprofiel. Dit overschrijft het standaardverzendprofiel van documenten.];
+                ToolTipML=ENU=Specifies the preferred method of sending documents to this vendor, so that you do not have to select a sending option every time that you post and send a document to the vendor. Documents to this vendor will be sent using the specified sending profile and will override the default document sending profile.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Document Sending Profile";
                 Importance=Additional }
 
     { 18  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies a search name.;
-                           FRB=SpÇcifie un nom de recherche.;
-                           NLB=Hiermee wordt een zoeknaam opgegeven.];
+                ToolTipML=ENU=Specifies a search name.;
                 SourceExpr="Search Name";
                 Importance=Additional }
 
     { 22  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies a code to specify the purchaser who normally handles this vendor's account.;
-                           FRB=SpÇcifie un code pour prÇciser l'acheteur qui s'occupe habituellement du compte de ce fournisseur.;
-                           NLB=Hiermee wordt een code opgegeven om de inkoper aan te geven die gewoonlijk met deze leverancier werkt.];
+                ToolTipML=ENU=Specifies a code to specify the purchaser who normally handles this vendor's account.;
                 SourceExpr="Purchaser Code";
                 Importance=Additional }
 
     { 55  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the code for the responsibility center that will administer this vendor by default.;
-                           FRB=SpÇcifie le code du centre de gestion qui gäre ce fournisseur par dÇfaut.;
-                           NLB=Hiermee wordt de code opgegeven voor de divisie die deze leverancier standaard beheert.];
+                ToolTipML=ENU=Specifies the code for the responsibility center that will administer this vendor by default.;
                 SourceExpr="Responsibility Center";
                 Importance=Additional }
 
     { 1902768601;1;Group  ;
-                CaptionML=[ENU=Address & Contact;
-                           FRB=Adresse et contact;
-                           NLB=Adres en contactpersoon];
+                CaptionML=ENU=Address & Contact;
                 GroupType=Group }
 
     { 43  ;2   ;Group     ;
-                CaptionML=[ENU=Address;
-                           FRB=Adresse;
-                           NLB=Adres];
+                CaptionML=ENU=Address;
                 GroupType=Group }
 
     { 6   ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's address.;
-                           FRB=SpÇcifie l'adresse du fournisseur.;
-                           NLB=Hiermee wordt het adres van de leverancier opgegeven.];
+                ToolTipML=ENU=Specifies the vendor's address.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr=Address }
 
     { 8   ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies additional address information.;
-                           FRB=SpÇcifie des informations d'adresse supplÇmentaires.;
-                           NLB=Hiermee wordt aanvullende adresinformatie opgegeven.];
+                ToolTipML=ENU=Specifies additional address information.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Address 2" }
 
     { 79  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the postal code.;
-                           FRB=SpÇcifie le code postal.;
-                           NLB=Hiermee wordt de postcode opgegeven.];
+                ToolTipML=ENU=Specifies the postal code.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Post Code";
                 Importance=Promoted }
 
     { 10  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's city.;
-                           FRB=SpÇcifie la ville du fournisseur.;
-                           NLB=Hiermee wordt de plaats van de leverancier opgegeven.];
+                ToolTipML=ENU=Specifies the vendor's city.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr=City }
 
     { 81  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the country/region of the address.;
-                           FRB=SpÇcifie le pays/la rÇgion de l'adresse.;
-                           NLB=Hiermee wordt het land of de regio van het adres opgegeven.];
+                ToolTipML=ENU=Specifies the country/region of the address.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Country/Region Code" }
 
     { 49  ;3   ;Field     ;
                 Name=ShowMap;
-                ToolTipML=[ENU=Specifies you can view the customer's address on your preferred map website.;
-                           FRB=SpÇcifie que vous pouvez afficher l'adresse du client sur votre site Web de mappage prÇfÇrÇ.;
-                           NLB=Hiermee wordt opgegeven dat u het adres van de klant op de kaartenwebsite van uw voorkeur kunt zien.];
+                ToolTipML=ENU=Specifies you can view the customer's address on your preferred map website.;
                 SourceExpr=ShowMapLbl;
                 Editable=FALSE;
                 Style=StrongAccent;
@@ -915,25 +703,17 @@ OBJECT Page 26 Vendor Card
                 ShowCaption=No }
 
     { 44  ;2   ;Group     ;
-                CaptionML=[ENU=Contact;
-                           FRB=Contact;
-                           NLB=Contactpersoon];
+                CaptionML=ENU=Contact;
                 GroupType=Group }
 
     { 11  ;3   ;Field     ;
-                CaptionML=[ENU=Primary Contact Code;
-                           FRB=Code contact principal;
-                           NLB=Code van primaire contactpersoon];
-                ToolTipML=[ENU=Specifies the primary contact number for the customer.;
-                           FRB=SpÇcifie le numÇro de contact principal du client.;
-                           NLB=Hiermee wordt het primaire contactnummer opgegeven van de klant.];
+                CaptionML=ENU=Primary Contact Code;
+                ToolTipML=ENU=Specifies the primary contact number for the customer.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Primary Contact No." }
 
     { 16  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the name of the person you regularly contact when you do business with this vendor.;
-                           FRB=SpÇcifie le nom de la personne que vous contactez rÇguliärement lorsque vous traitez avec ce fournisseur.;
-                           NLB=Hiermee wordt de naam opgegeven van de persoon met wie u regelmatig contact opneemt wanneer u zaken doet met deze leverancier.];
+                ToolTipML=ENU=Specifies the name of the person you regularly contact when you do business with this vendor.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr=Contact;
                 Importance=Promoted;
@@ -944,50 +724,36 @@ OBJECT Page 26 Vendor Card
                             }
 
     { 12  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's telephone number.;
-                           FRB=SpÇcifie le numÇro de tÇlÇphone du fournisseur.;
-                           NLB=Hiermee wordt het telefoonnummer van de leverancier opgegeven.];
+                ToolTipML=ENU=Specifies the vendor's telephone number.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Phone No." }
 
     { 48  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's email address.;
-                           FRB=SpÇcifie l'adresse de messagerie du fournisseur.;
-                           NLB=Hiermee wordt het e-mailadres van de leverancier opgegeven.];
+                ToolTipML=ENU=Specifies the vendor's email address.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="E-Mail";
                 Importance=Promoted }
 
     { 58  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the customer's fax number.;
-                           FRB=SpÇcifie le numÇro de tÇlÇcopie du client.;
-                           NLB=Hiermee wordt het faxnummer van de klant opgegeven.];
+                ToolTipML=ENU=Specifies the customer's fax number.;
                 SourceExpr="Fax No.";
                 Importance=Additional }
 
     { 86  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's home page address.;
-                           FRB=SpÇcifie la page d'accueil du fournisseur.;
-                           NLB=Hiermee wordt het adres van de startpagina van de leverancier opgegeven.];
+                ToolTipML=ENU=Specifies the vendor's home page address.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Home Page" }
 
     { 50  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies your account number with the vendor, if you have one.;
-                           FRB=SpÇcifie votre numÇro de compte avec le fournisseur, si vous en avez un.;
-                           NLB=Hiermee wordt uw rekeningnummer bij de leverancier opgegeven, indien van toepassing.];
+                ToolTipML=ENU=Specifies your account number with the vendor, if you have one.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Our Account No." }
 
     { 1905885101;1;Group  ;
-                CaptionML=[ENU=Invoicing;
-                           FRB=Facturation;
-                           NLB=Facturering] }
+                CaptionML=ENU=Invoicing }
 
     { 23  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's VAT registration number.;
-                           FRB=SpÇcifie le n¯ identif. intracomm. du fournisseur.;
-                           NLB=Hiermee wordt het btw-nummer van de leverancier opgegeven.];
+                ToolTipML=ENU=Specifies the vendor's VAT registration number.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="VAT Registration No.";
                 OnDrillDown=VAR
@@ -998,137 +764,96 @@ OBJECT Page 26 Vendor Card
                              }
 
     { 25  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor in connection with electronic document receiving.;
-                           FRB=SpÇcifie le fournisseur en relation avec la rÇception de documents Çlectroniques.;
-                           NLB=Hiermee wordt de leverancier opgegeven in verband met de ontvangst van elektronische documenten.];
+                ToolTipML=ENU=Specifies the vendor in connection with electronic document receiving.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr=GLN;
                 Importance=Additional }
 
     { 30  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the number of a different vendor whom you pay for products delivered by the vendor on the vendor card.;
-                           FRB=SpÇcifie le numÇro d'un autre fournisseur Ö qui vous payez des produits livrÇs par le fournisseur sur la fiche fournisseur.;
-                           NLB=Hiermee wordt het nummer opgegeven van een andere leverancier die u betaalt voor producten die door de leverancier op de leverancierskaart worden geleverd.];
+                ToolTipML=ENU=Specifies the number of a different vendor whom you pay for products delivered by the vendor on the vendor card.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Pay-to Vendor No.";
                 Importance=Additional }
 
     { 34  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's invoice discount code. When you set up a new vendor card, the number you have entered in the No. field is automatically inserted.;
-                           FRB=SpÇcifie le code remise facture du fournisseur. Lorsque vous crÇez une nouvelle fiche fournisseur, le numÇro que vous avez saisi dans le champ N¯ est insÇrÇ automatiquement.;
-                           NLB=Hiermee wordt de factuurkortingscode van de leverancier opgegeven. Wanneer u een nieuwe leverancierskaart instelt, wordt automatisch het nummer ingevoegd dat u in het veld Nr. hebt ingevoerd.];
+                ToolTipML=ENU=Specifies the vendor's invoice discount code. When you set up a new vendor card, the number you have entered in the No. field is automatically inserted.;
                 ApplicationArea=#Basic,#Suite;
                 NotBlank=Yes;
                 SourceExpr="Invoice Disc. Code";
                 Importance=Additional }
 
     { 94  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies if the Direct Unit Cost and Line Amount fields on the purchase lines and in purchase reports should be shown with or without VAT.;
-                           FRB=SpÇcifie si les champs Coñt unitaire direct et Montant ligne sur les lignes achat et dans les Çtats des achats doivent àtre affichÇs avec ou sans la TVA.;
-                           NLB=Hiermee wordt opgegeven of de velden Directe kostprijs en Regelbedrag op de inkoopregels en in inkooprapporten met of zonder btw moeten worden weergegeven.];
+                ToolTipML=ENU=Specifies if the Direct Unit Cost and Line Amount fields on the purchase lines and in purchase reports should be shown with or without VAT.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Prices Including VAT" }
 
     { 46  ;2   ;Group     ;
-                CaptionML=[ENU=Posting Details;
-                           FRB=DÇtails de validation;
-                           NLB=Boekingsgegevens];
+                CaptionML=ENU=Posting Details;
                 GroupType=Group }
 
     { 60  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's trade type to link transactions made for this vendor with the appropriate general ledger account according to the general posting setup.;
-                           FRB=SpÇcifie le type commercial du fournisseur pour lier les transactions effectuÇes pour ce fournisseur au compte gÇnÇral appropriÇ en fonction des paramätres de validation gÇnÇraux.;
-                           NLB=Hiermee wordt het handelstype van de leverancier opgegeven om transacties die voor deze leverancier zijn gemaakt, aan de juiste grootboekrekening te koppelen volgens de algemene boekingsinstelling.];
+                ToolTipML=ENU=Specifies the vendor's trade type to link transactions made for this vendor with the appropriate general ledger account according to the general posting setup.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Gen. Bus. Posting Group";
                 Importance=Additional;
                 ShowMandatory=TRUE }
 
     { 90  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's VAT specification to link transactions made for this vendor with the appropriate general ledger account according to the VAT posting setup.;
-                           FRB=SpÇcifie le dÇtail TVA du fournisseur pour lier les transactions effectuÇes pour ce fournisseur au compte gÇnÇral appropriÇ en fonction des paramätres de comptabilisation TVA.;
-                           NLB=Hiermee wordt de btw-specificatie van de leverancier opgegeven om transacties die voor deze leverancier zijn gemaakt, aan de juiste grootboekrekening te koppelen volgens de btw-boekingsinstellingen.];
+                ToolTipML=ENU=Specifies the vendor's VAT specification to link transactions made for this vendor with the appropriate general ledger account according to the VAT posting setup.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="VAT Bus. Posting Group";
                 Importance=Additional }
 
     { 32  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's market type to link business transactions made for the vendor with the appropriate account in the general ledger.;
-                           FRB=SpÇcifie le type de marchÇ du fournisseur pour lier les transactions commerciales effectuÇes pour le fournisseur au compte appropriÇ dans la comptabilitÇ.;
-                           NLB=Hiermee wordt het marktsoort van de leverancier opgegeven om bedrijfstransacties die voor de leverancier zijn gemaakt, aan de juiste rekening in het grootboek te koppelen.];
+                ToolTipML=ENU=Specifies the vendor's market type to link business transactions made for the vendor with the appropriate account in the general ledger.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Vendor Posting Group";
                 Importance=Additional;
                 ShowMandatory=TRUE }
 
     { 47  ;2   ;Group     ;
-                CaptionML=[ENU=Foreign Trade;
-                           FRB=International;
-                           NLB=Buitenlandse handel];
+                CaptionML=ENU=Foreign Trade;
                 GroupType=Group }
 
     { 52  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the currency code that is inserted by default when you create purchase documents or journal lines for the vendor.;
-                           FRB=SpÇcifie le code devise qui est insÇrÇ par dÇfaut lorsque vous crÇez des documents achat ou des lignes feuille pour le fournisseur.;
-                           NLB=Hiermee wordt de valutacode opgegeven die standaard wordt ingevoegd wanneer u inkoopdocumenten of dagboekregels voor de leverancier maakt.];
+                ToolTipML=ENU=Specifies the currency code that is inserted by default when you create purchase documents or journal lines for the vendor.;
                 ApplicationArea=#Suite;
                 SourceExpr="Currency Code";
                 Importance=Additional }
 
     { 56  ;3   ;Field     ;
-                ToolTipML=[ENU=Specifies the language on printouts for this vendor.;
-                           FRB=Indique la langue des documents imprimÇs pour ce fournisseur.;
-                           NLB=Hiermee wordt de taal opgegeven op afdrukken voor deze leverancier.];
+                ToolTipML=ENU=Specifies the language on printouts for this vendor.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Language Code";
                 Importance=Additional }
 
-    { 1010004;2;Field     ;
-                ToolTipML=[ENU=Specifies the vendor's enterprise number.;
-                           FRB=SpÇcifie le numÇro d'entreprise du fournisseur.;
-                           NLB=Hiermee wordt het ondernemingsnummer van de leverancier aangegeven.];
-                ApplicationArea=#Basic,#Suite;
-                SourceExpr="Enterprise No." }
-
     { 1901677601;1;Group  ;
-                CaptionML=[ENU=Payments;
-                           FRB=Paiements;
-                           NLB=Betalingen] }
+                CaptionML=ENU=Payments }
 
     { 36  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies how to apply payments to entries for this vendor.;
-                           FRB=SpÇcifie la maniäre de lettrer des paiements avec des Çcritures pour ce fournisseur.;
-                           NLB=Hiermee wordt opgegeven hoe u betalingen vereffent met posten voor deze leverancier.];
+                ToolTipML=ENU=Specifies how to apply payments to entries for this vendor.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Application Method" }
 
     { 38  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies a code that indicates the payment terms that the vendor usually requires.;
-                           FRB=SpÇcifie un code qui indique les conditions de paiement que le fournisseur exige habituellement.;
-                           NLB=Hiermee wordt een code opgegeven die aangeeft welke betalingsvoorwaarden de leverancier gewoonlijk hanteert.];
+                ToolTipML=ENU=Specifies a code that indicates the payment terms that the vendor usually requires.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Payment Terms Code";
                 Importance=Promoted }
 
     { 40  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies how the vendor requires you to submit payment, such as bank transfer or check.;
-                           FRB=SpÇcifie le mode de paiement exigÇ par le fournisseur, tel que virement bancaire ou chäque.;
-                           NLB=Hiermee wordt opgegeven hoe de leverancier wil dat u betaalt, zoals bankovermaking of cheque.];
+                ToolTipML=ENU=Specifies how the vendor requires you to submit payment, such as bank transfer or check.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Payment Method Code";
                 Importance=Promoted }
 
     { 42  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the importance of the vendor when suggesting payments using the Suggest Vendor Payments function.;
-                           FRB=SpÇcifie l'importance du fournisseur lors de la proposition de paiements Ö l'aide de la fonction Proposer paiements fournisseur.;
-                           NLB=Hiermee wordt het belang van de leverancier opgegeven wanneer betalingen worden voorgesteld met de functie Leveranciersbetalingen voorstellen.];
+                ToolTipML=ENU=Specifies the importance of the vendor when suggesting payments using the Suggest Vendor Payments function.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr=Priority }
 
     { 119 ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies if the vendor allows payment tolerance.;
-                           FRB=SpÇcifie si le fournisseur autorise un Çcart de räglement.;
-                           NLB=Hiermee wordt opgegeven of de leverancier betalingstolerantie geeft.];
+                ToolTipML=ENU=Specifies if the vendor allows payment tolerance.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Block Payment Tolerance";
                 OnValidate=BEGIN
@@ -1143,78 +868,49 @@ OBJECT Page 26 Vendor Card
                             }
 
     { 9   ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the vendor bank account that will be used by default on payment journal lines for export to a payment bank file.;
-                           FRB=SpÇcifie le compte bancaire fournisseur utilisÇ par dÇfaut sur les lignes feuille paiement pour l'exportation vers un fichier de la banque de paiement.;
-                           NLB=Hiermee wordt de bankrekening van de leverancier opgegeven die standaard voor betalingsdagboekregels wordt gebruikt om te exporteren naar een betalingsbankbestand.];
+                ToolTipML=ENU=Specifies the vendor bank account that will be used by default on payment journal lines for export to a payment bank file.;
                 ApplicationArea=#Basic,#Suite;
                 SourceExpr="Preferred Bank Account Code" }
 
     { 15  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies if the vendor is a person or a company.;
-                           FRB=SpÇcifie si le fournisseur est une personne ou une sociÇtÇ.;
-                           NLB=Hiermee wordt opgegeven of de leverancier een persoon of een bedrijf is.];
+                ToolTipML=ENU=Specifies if the vendor is a person or a company.;
                 SourceExpr="Partner Type" }
 
     { 3   ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies a payment term that will be used for calculating cash flow.;
-                           FRB=SpÇcifie les conditions de paiement qui sont utilisÇes pour le calcul de la trÇsorerie.;
-                           NLB=Hiermee wordt een betalingsvoorwaarde opgegeven die wordt gebruikt om cashflow te berekenen.];
+                ToolTipML=ENU=Specifies a payment term that will be used for calculating cash flow.;
                 SourceExpr="Cash Flow Payment Terms Code" }
 
-    { 1010000;2;Field     ;
-                ToolTipML=[ENU=Specifies to place a check mark in the check box, if you want the outstanding ledger entries of this vendor to be included.;
-                           FRB=SpÇcifie de cocher cette case pour inclure les Çcritures comptables ouvertes de ce fournisseur.;
-                           NLB=Hiermee wordt aangegeven dat u het selectievakje moet inschakelen indien u de uitstaande grootboekboekingen van deze leverancier wilt opnemen.];
-                ApplicationArea=#Basic,#Suite;
-                SourceExpr="Suggest Payments" }
-
     { 13  ;2   ;Field     ;
-                ToolTipML=[ENU=Identifies the vendor who sent the purchase invoice.;
-                           FRB=Identifie le fournisseur qui a envoyÇ la facture achat.;
-                           NLB=Hiermee wordt de leverancier aangegeven die de inkoopfactuur heeft verzonden.];
+                ToolTipML=ENU=Identifies the vendor who sent the purchase invoice.;
                 SourceExpr="Creditor No." }
 
     { 1901075901;1;Group  ;
-                CaptionML=[ENU=Receiving;
-                           FRB=RÇception;
-                           NLB=Ontvangst] }
+                CaptionML=ENU=Receiving }
 
     { 100 ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies the warehouse location where items from the vendor must be received by default.;
-                           FRB=SpÇcifie l'entrepìt oó les articles du fournisseur doivent àtre reáus par dÇfaut.;
-                           NLB=Hiermee wordt de magazijnlocatie opgegeven waar artikelen van de leverancier standaard moeten worden ontvangen.];
+                ToolTipML=ENU=Specifies the warehouse location where items from the vendor must be received by default.;
                 SourceExpr="Location Code";
                 Importance=Promoted }
 
     { 28  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies how the vendor must ship items to you.;
-                           FRB=SpÇcifie de quelle maniäre le fournisseur doit vous expÇdier les articles.;
-                           NLB=Hiermee wordt opgegeven hoe de leverancier artikelen naar u moet verzenden.];
+                ToolTipML=ENU=Specifies how the vendor must ship items to you.;
                 SourceExpr="Shipment Method Code";
                 Importance=Promoted }
 
     { 96  ;2   ;Field     ;
-                ToolTipML=[ENU=Specifies a date formula for the time that it takes to replenish the item.;
-                           FRB=SpÇcifie une formule date pour le dÇlai nÇcessaire au rÇapprovisionnement de l'article.;
-                           NLB=Hiermee wordt een datumformule opgegeven voor de tijd die nodig is om het artikel aan te vullen.];
+                ToolTipML=ENU=Specifies a date formula for the time that it takes to replenish the item.;
                 SourceExpr="Lead Time Calculation";
                 Importance=Promoted }
 
     { 112 ;2   ;Field     ;
                 DrillDown=No;
-                ToolTipML=[ENU=Specifies the code for the vendor's customized calendar.;
-                           FRB=SpÇcifie le code du calendrier personnalisÇ du fournisseur.;
-                           NLB=Hiermee wordt de code opgegeven voor de aangepaste agenda van de leverancier.];
+                ToolTipML=ENU=Specifies the code for the vendor's customized calendar.;
                 SourceExpr="Base Calendar Code" }
 
     { 121 ;2   ;Field     ;
                 Name=Customized Calendar;
-                CaptionML=[ENU=Customized Calendar;
-                           FRB=Calendrier personnalisÇ;
-                           NLB=Gepersonaliseerde agenda];
-                ToolTipML=[ENU=Specifies if you have set up a customized calendar for the vendor.;
-                           FRB=SpÇcifie si vous avez configurÇ un calendrier personnalisÇ pour le fournisseur.;
-                           NLB=Hiermee wordt opgegeven of u een aangepaste agenda voor de leverancier hebt ingesteld.];
+                CaptionML=ENU=Customized Calendar;
+                ToolTipML=ENU=Specifies if you have set up a customized calendar for the vendor.;
                 SourceExpr=CalendarMgmt.CustomizedCalendarExistText(CustomizedCalendar."Source Type"::Vendor,"No.",'',"Base Calendar Code");
                 Editable=FALSE;
                 OnDrillDown=BEGIN
@@ -1321,15 +1017,15 @@ OBJECT Page 26 Vendor Card
       CalendarMgmt@1000 : Codeunit 7600;
       PaymentToleranceMgt@1002 : Codeunit 426;
       ApprovalsMgmt@1010 : Codeunit 1535;
-      Text001@1005 : TextConst 'ENU=Do you want to allow payment tolerance for entries that are currently open?;FRB=Souhaitez-vous autoriser les Çcarts de räglement pour les Çcritures actuellement ouvertes ?;NLB=Wilt u betalingstolerantie toestaan voor posten die momenteel openstaan?';
-      Text002@1004 : TextConst 'ENU=Do you want to remove payment tolerance from entries that are currently open?;FRB=Souhaitez-vous supprimer les Çcarts de räglement pour les Çcritures actuellement ouvertes ?;NLB=Wilt u betalingstolerantie verwijderen voor posten die momenteel openstaan?';
+      Text001@1005 : TextConst 'ENU=Do you want to allow payment tolerance for entries that are currently open?';
+      Text002@1004 : TextConst 'ENU=Do you want to remove payment tolerance from entries that are currently open?';
       ContactEditable@19051436 : Boolean INDATASET;
       SocialListeningSetupVisible@1007 : Boolean INDATASET;
       SocialListeningVisible@1006 : Boolean INDATASET;
       OpenApprovalEntriesExistCurrUser@1009 : Boolean;
       OpenApprovalEntriesExist@1008 : Boolean;
       ShowWorkflowStatus@1011 : Boolean;
-      ShowMapLbl@1014 : TextConst 'ENU=Show on Map;FRB=Afficher sur une carte;NLB=Weergeven op kaart';
+      ShowMapLbl@1014 : TextConst 'ENU=Show on Map';
       IsOfficeAddin@1012 : Boolean;
       CanCancelApprovalForRecord@1013 : Boolean;
       SendToOCREnabled@1016 : Boolean;
