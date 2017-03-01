@@ -1,0 +1,51 @@
+OBJECT Table 50000 HW Hello World
+{
+  OBJECT-PROPERTIES
+  {
+    Date=24/02/17;
+    Time=14:06:39;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+  }
+  FIELDS
+  {
+    { 1   ;   ;Language            ;Code10         }
+    { 2   ;   ;Hello World         ;Text30         }
+  }
+  KEYS
+  {
+    {    ;Language                                ;Clustered=Yes }
+  }
+  FIELDGROUPS
+  {
+  }
+  CODE
+  {
+
+    PROCEDURE GetRandomGreeting@1() : Text;
+    VAR
+      GetRandomGreetingMeth@1000 : Codeunit 50001;
+    BEGIN
+      EXIT(GetRandomGreetingMeth.GetRandomGreeting);
+    END;
+
+    PROCEDURE SayHelloWorld@86400(Value@86400 : Text);
+    VAR
+      HWSayHelloWorldMethod@86401 : Codeunit 50000;
+    BEGIN
+      HWSayHelloWorldMethod.SayHelloWorld(Value);
+    END;
+
+    PROCEDURE GetAppId@2() Id : Text;
+    BEGIN
+      Id := '{91af0412-5efc-4d1a-a988-efb5f4fd9c9d}';
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

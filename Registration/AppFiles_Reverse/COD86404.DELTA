@@ -1,0 +1,21 @@
+OBJECT Modification "REG Rolcenter Events"(Codeunit 86404)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=;
+    Time=;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    Target="REG Rolcenter Events"(Codeunit 86404);
+    ChangeType=Deletion;
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

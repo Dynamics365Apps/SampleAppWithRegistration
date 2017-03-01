@@ -1,0 +1,522 @@
+OBJECT Codeunit 86401 REG Registration Class
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=12:55:45;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+    VAR
+      IsInitialized@86400 : Boolean;
+      CurrentAppId@86401 : GUID;
+      CurrentRegHostUrl@86402 : Text;
+      CurrentLevel@86403 : Integer;
+      CurrentNotificationMsg@86404 : Text;
+      ErrorWebService@86405 : TextConst 'ENU=An error occurred on checking your app registration. Please contact your vendor for more information.';
+      CurrentRedirectUrl@86407 : Text;
+      CurrentNotificationActionText@86408 : Text;
+
+    PROCEDURE CheckCurrentAccessLevel@86400(AppID@86400 : GUID;RegHostUrl@86403 : Text;RequiredAccessLevel@86401 : Integer;ShowNotification@86402 : Boolean) : Boolean;
+    BEGIN
+      AssertInitialized(AppID, RegHostUrl);
+
+      IF RequiredAccessLevel > CurrentLevel THEN BEGIN
+        IF ShowNotification AND GUIALLOWED THEN
+          HandleNotificationOnCheck(AppID, CurrentNotificationMsg,CurrentNotificationActionText,CurrentRedirectUrl);
+
+        EXIT(FALSE);
+      END;
+
+      EXIT(TRUE);
+    END;
+
+    LOCAL PROCEDURE AssertInitialized@86401(VAR AppID@86401 : GUID;VAR RegHostUrl@86400 : Text);
+    BEGIN
+      IF CurrentAppId <> AppID THEN IsInitialized := FALSE;
+      IF CurrentRegHostUrl <> RegHostUrl THEN IsInitialized := FALSE;
+
+      CurrentAppId := AppID;
+      CurrentRegHostUrl := RegHostUrl;
+
+      IF NOT IsInitialized THEN
+        Initialize;
+
+      IsInitialized := TRUE;
+    END;
+
+    LOCAL PROCEDURE Initialize@86402();
+    VAR
+      Url@90000 : Text;
+      Json@90006 : Text;
+      HttpWebRequestMgt@90001 : Codeunit 1297;
+      TempBlob@90002 : Record 99008535;
+      Instr@90003 : InStream;
+      HttpStatusCode@90005 : DotNet "'System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.Net.HttpStatusCode";
+      ResponseHeaders@90004 : DotNet "'System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.Collections.Specialized.NameValueCollection";
+      JObject@90007 : DotNet "'Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'.Newtonsoft.Json.Linq.JObject";
+      REGAccessLevelEnum@86400 : Codeunit 86402;
+    BEGIN
+      Url := GetCheckRegistrationLink;
+
+      HttpWebRequestMgt.Initialize(Url);
+      HttpWebRequestMgt.DisableUI;
+      HttpWebRequestMgt.SetMethod('GET');
+      HttpWebRequestMgt.SetReturnType('application/json');
+
+      TempBlob.INIT;
+      TempBlob.Blob.CREATEINSTREAM(Instr);
+
+      CurrentLevel := REGAccessLevelEnum.FullAccess;
+      CurrentNotificationMsg := '';
+
+      IF HttpWebRequestMgt.GetResponse(Instr,HttpStatusCode,ResponseHeaders) THEN BEGIN
+        IF HttpStatusCode.ToString = HttpStatusCode.OK.ToString THEN BEGIN
+          Json := TempBlob.ReadAsText('',TEXTENCODING::UTF8);
+          JObject := JObject.Parse(Json);
+          EVALUATE(CurrentLevel,JObject.GetValue('accessLevel').ToString);
+          CurrentNotificationMsg := JObject.GetValue('notificationMessage').ToString;
+          CurrentRedirectUrl := JObject.GetValue('redirectUrl').ToString;
+          CurrentNotificationActionText := JObject.GetValue('notificationActionText').ToString;
+        END ELSE
+          CurrentNotificationMsg := ErrorWebService;
+      END ELSE
+        CurrentNotificationMsg := ErrorWebService;
+    END;
+
+    LOCAL PROCEDURE GetCheckRegistrationLink@86403() ReturnValue : Text;
+    VAR
+      AppRegHost@86400 : Text;
+    BEGIN
+      ReturnValue := CurrentRegHostUrl + GetAppCheckRegPath + GetAppRegParameters;
+    END;
+
+    LOCAL PROCEDURE GetAppCheckRegPath@86404() : Text;
+    BEGIN
+      EXIT('api/CheckRegistration');
+    END;
+
+    LOCAL PROCEDURE GetAppRegParameters@86405() Params : Text;
+    BEGIN
+      Params := '?tenantid=%1&appid=%2&companyname=%3&numberusers=%4&isevaluationcompany=%5';
+      Params := STRSUBSTNO(Params,GetTenantId,CurrentAppId,GetEncodedCompanyName,GetNumberOfActiveUsers,FORMAT(IsEvaluationCompany,0,2));
+    END;
+
+    LOCAL PROCEDURE GetTenantId@86406() : Text;
+    VAR
+      Url@90000 : Text;
+      Uri@90001 : DotNet "'System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.System.Uri";
+    BEGIN
+      Url := GETURL(CLIENTTYPE::Web);
+      Uri := Uri.Uri(Url);
+      EXIT(Uri.Host);
+    END;
+
+    LOCAL PROCEDURE GetEncodedCompanyName@86407() : Text;
+    VAR
+      SystemWebHttpUtility@50000 : DotNet "'System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.System.Web.HttpUtility";
+    BEGIN
+      EXIT(SystemWebHttpUtility.UrlEncode(COMPANYNAME));
+    END;
+
+    LOCAL PROCEDURE GetNumberOfActiveUsers@86408() : Integer;
+    VAR
+      UserRec@90000 : Record 2000000120;
+    BEGIN
+      UserRec.SETRANGE(State,UserRec.State::Enabled);
+      UserRec.SETFILTER("License Type",'%1|%2',UserRec."License Type"::"Full User",UserRec."License Type"::"Limited User");
+      EXIT(UserRec.COUNT);
+    END;
+
+    LOCAL PROCEDURE IsEvaluationCompany@86409() : Boolean;
+    VAR
+      Company@86400 : Record 2000000006;
+    BEGIN
+      Company.GET(COMPANYNAME);
+      EXIT(Company."Evaluation Company");
+    END;
+
+    LOCAL PROCEDURE HandleNotificationOnCheck@86410(AppID@86404 : GUID;NotificationMsg@86403 : Text;NotificationActionText@86400 : Text;RedirectUrl@86402 : Text);
+    VAR
+      REGShowPermissionNotification@86401 : Codeunit 86403;
+    BEGIN
+      REGShowPermissionNotification.ShowPermissionsNotification(AppID, NotificationMsg,NotificationActionText,RedirectUrl);
+    END;
+
+    BEGIN
+    END.
+  }
+}
+
+OBJECT Codeunit 86402 REG Access Level Enum
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=12:54:31;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    PROCEDURE NoAccess@86400() : Integer;
+    BEGIN
+      EXIT(0);
+    END;
+
+    PROCEDURE LimitedAccess@86401() : Integer;
+    BEGIN
+      EXIT(1);
+    END;
+
+    PROCEDURE FullAccess@86402() : Integer;
+    BEGIN
+      EXIT(2);
+    END;
+
+    BEGIN
+    END.
+  }
+}
+
+OBJECT Codeunit 86403 REG ShowPermissionNotification
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=12:54:16;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    PROCEDURE ShowPermissionsNotification@86400(AppID@86404 : GUID;NotificationMsg@86400 : Text;ActionText@86401 : Text;RedirectUrl@86402 : Text);
+    VAR
+      Handled@50000 : Boolean;
+    BEGIN
+      OnBeforeShowPermissionsNotification(AppID,NotificationMsg,ActionText,RedirectUrl,Handled);
+
+      DoShowPermissionsNotification(AppID,NotificationMsg,ActionText,RedirectUrl, Handled);
+
+      OnAfterShowPermissionsNotification(AppID,NotificationMsg,ActionText,RedirectUrl, Handled);
+    END;
+
+    LOCAL PROCEDURE DoShowPermissionsNotification@86401(AppID@86405 : GUID;NotificationMsg@86403 : Text;ActionText@86402 : Text;RedirectUrl@86401 : Text;VAR Handled@86400 : Boolean);
+    VAR
+      TheNotification@86404 : Notification;
+    BEGIN
+      IF Handled THEN EXIT;
+
+      WITH TheNotification DO BEGIN
+        ID := AppID;
+        MESSAGE := NotificationMsg;
+        SCOPE := NOTIFICATIONSCOPE::LocalScope;
+        IF ActionText <> '' THEN BEGIN
+          ADDACTION(ActionText,CODEUNIT::"REG ShowPermissionNotification",'HandleAction');
+          SETDATA('RedirectUrl', RedirectUrl);
+        END;
+        SEND;
+      END;
+    END;
+
+    PROCEDURE HandleAction@86402(TheNotification@1000 : Notification);
+    VAR
+      REGWebViewer@86400 : Page 86400;
+    BEGIN
+      REGWebViewer.SetURL(TheNotification.GETDATA('RedirectUrl'));
+      REGWebViewer.RUN;
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnBeforeShowPermissionsNotification@86403(AppID@86403 : GUID;NotificationMsg@86402 : Text;ActionText@86401 : Text;RedirectUrl@86400 : Text;VAR Handled@50000 : Boolean);
+    BEGIN
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnAfterShowPermissionsNotification@86404(AppID@86404 : GUID;NotificationMsg@86403 : Text;ActionText@86402 : Text;RedirectUrl@86401 : Text;VAR Handled@86400 : Boolean);
+    BEGIN
+    END;
+
+    BEGIN
+    END.
+  }
+}
+
+OBJECT Codeunit 86404 REG Rolcenter Events
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=12:53:06;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    [Integration]
+    LOCAL PROCEDURE OnOpenRoleCenter@86400();
+    BEGIN
+    END;
+
+    [EventSubscriber(Page,2500,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageExtensionsManagement@86401(VAR Rec@1000 : Record 2000000160);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,1310,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageO365Activities@86402(VAR Rec@1000 : Record 1313);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9030,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccountManagerActivities@86403(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9032,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccPayablesActivities@86404(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9034,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccReceivableActivities@86405(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9036,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageBookkeeperActivities@86406(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9037,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccountantActivities@86407(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9038,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageProductionPlannerActivities@86408(VAR Rec@1000 : Record 9056);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9039,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageO365SalesActivities@86409(VAR Rec@1000 : Record 9069);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9041,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageShopSupervisorActivities@86410(VAR Rec@1000 : Record 9056);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9042,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageTeamMemberActivities@86411(VAR Rec@1000 : Record 9042);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9044,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageShopSuperBasicActivities@86412(VAR Rec@1000 : Record 9056);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9047,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageMachineOperatorActivities@86413(VAR Rec@1000 : Record 9056);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9050,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageWhseShipReceiveActivities@86414(VAR Rec@1000 : Record 9050);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9053,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageWMSShipReceiveActivities@86415(VAR Rec@1000 : Record 9051);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9056,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageWarehouseWorkerActivities@86416(VAR Rec@1000 : Record 9058);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9057,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageServiceDispatcherActivities@86417(VAR Rec@1000 : Record 9052);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9060,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageSOProcessorActivities@86418(VAR Rec@1000 : Record 9053);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9062,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageUserSecurityActivities@86419(VAR Rec@1000 : Record 9062);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9063,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPagePurchaseAgentActivities@86420(VAR Rec@1000 : Record 9055);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9066,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageServOutboundTechnicianAct@86421(VAR Rec@1000 : Record 9052);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9067,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageResourceManagerActivities@86422(VAR Rec@1000 : Record 9057);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9068,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageProjectManagerActivities@86423(VAR Rec@1000 : Record 9057);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9070,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccountingServicesActivities@86424(VAR Rec@1000 : Record 9070);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9072,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageITOperationsActivities@86425(VAR Rec@1000 : Record 9059);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9073,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageSmallBusinessOwnerAct@86426(VAR Rec@1000 : Record 9060);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9075,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageRapidStartServicesActivities@86427(VAR Rec@1000 : Record 9061);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9076,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageSalesRelationshipMgrAct@86428(VAR Rec@1000 : Record 9063);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    BEGIN
+    END.
+  }
+}
+
+OBJECT Page 86400 REG Web Viewer
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=12:53:40;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    Editable=No;
+    CaptionML=ENU=Buy Subscription;
+  }
+  CONTROLS
+  {
+    { 86400;   ;Container ;
+                Name=Container;
+                ContainerType=ContentArea }
+
+    { 86401;1  ;Field     ;
+                Name=WebPageViewer;
+                ApplicationArea=#Basic,#Suite;
+                ControlAddIn=[Microsoft.Dynamics.Nav.Client.WebPageViewer;PublicKeyToken=31bf3856ad364e35] }
+
+  }
+  CODE
+  {
+    VAR
+      BuySubscriptionForwardLinkTxt@1001 : TextConst '@@@={Locked};ENU="https://go.microsoft.com/fwlink/?linkid=828659"';
+      CurrentUrl@86400 : Text;
+
+    PROCEDURE SetURL@86400(Value@86400 : Text);
+    BEGIN
+      CurrentUrl := Value;
+    END;
+
+    EVENT WebPageViewer@-86401::ControlAddInReady@8(callbackUrl@1000 : Text);
+    BEGIN
+      CurrPage.WebPageViewer.Navigate(CurrentUrl);
+    END;
+
+    EVENT WebPageViewer@-86401::DocumentReady@9();
+    BEGIN
+    END;
+
+    EVENT WebPageViewer@-86401::Callback@10(data@1000 : Text);
+    BEGIN
+    END;
+
+    EVENT WebPageViewer@-86401::Refresh@11(callbackUrl@1000 : Text);
+    BEGIN
+      CurrPage.WebPageViewer.Navigate(CurrentUrl);
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

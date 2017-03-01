@@ -1,0 +1,83 @@
+OBJECT Codeunit 50002 HW Subscribers
+{
+  OBJECT-PROPERTIES
+  {
+    Date=24/02/17;
+    Time=15:12:00;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    [EventSubscriber(Page,21,OnAfterActionEvent,"Say Hello World")]
+    LOCAL PROCEDURE SayHelloWorld_OnCustCardAction@86400(VAR Rec@86400 : Record 18);
+    BEGIN
+      SayHelloWorldCust(Rec);
+    END;
+
+    [EventSubscriber(Page,22,OnAfterActionEvent,"Say Hello World")]
+    LOCAL PROCEDURE SayHelloWorld_OnCustListAction@3(VAR Rec@1000 : Record 18);
+    BEGIN
+      SayHelloWorldCust(Rec);
+    END;
+
+    [EventSubscriber(Page,26,OnAfterActionEvent,"Say Hello World")]
+    LOCAL PROCEDURE SayHelloWorld_OnVendCardAction@86406(VAR Rec@86400 : Record 23);
+    BEGIN
+      SayHelloWorldVend(Rec);
+    END;
+
+    [EventSubscriber(Page,27,OnAfterActionEvent,"Say Hello World")]
+    LOCAL PROCEDURE SayHelloWorld_OnVendListAction@86405(VAR Rec@86400 : Record 23);
+    BEGIN
+      SayHelloWorldVend(Rec);
+    END;
+
+    LOCAL PROCEDURE SayHelloWorldCust@86401(VAR Customer@86400 : Record 18);
+    VAR
+      Handled@86402 : Boolean;
+      HWHelloWorld@86401 : Record 50000;
+    BEGIN
+      WITH Customer DO BEGIN
+        OnBeforeSayHelloWorldCust(Customer,Handled);
+
+        IF NOT Handled THEN
+          HWHelloWorld.SayHelloWorld(Name);
+      END;
+    END;
+
+    LOCAL PROCEDURE SayHelloWorldVend@86403(VAR Vendor@86400 : Record 23);
+    VAR
+      Handled@86402 : Boolean;
+      HWHelloWorld@86401 : Record 50000;
+    BEGIN
+      WITH Vendor DO BEGIN
+        OnBeforeSayHelloWorldVend(Vendor,Handled);
+
+        IF NOT Handled THEN
+          HWHelloWorld.SayHelloWorld(Name);
+      END;
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnBeforeSayHelloWorldCust@86404(VAR Customer@86401 : Record 18;VAR Handled@86400 : Boolean);
+    BEGIN
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnBeforeSayHelloWorldVend@86402(VAR Vendor@86401 : Record 23;VAR Handled@86400 : Boolean);
+    BEGIN
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

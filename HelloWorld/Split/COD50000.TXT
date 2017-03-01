@@ -1,0 +1,55 @@
+OBJECT Codeunit 50000 HW SayHelloWorld Method
+{
+  OBJECT-PROPERTIES
+  {
+    Date=24/02/17;
+    Time=13:22:45;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+    VAR
+      Object@90001 : Record 2000000001;
+
+    PROCEDURE SayHelloWorld@1(VAR Value@1000 : Text);
+    VAR
+      Handled@86400 : Boolean;
+    BEGIN
+      OnBeforeSayHelloWorld(Handled);
+
+      DoSayHelloWorld(Value, Handled);
+
+      OnAfterSayHelloWorld();
+    END;
+
+    LOCAL PROCEDURE DoSayHelloWorld@2(VAR Value@86400 : Text;VAR Handled@86401 : Boolean);
+    VAR
+      HelloWorld@1000 : Record 50000;
+    BEGIN
+      IF Handled THEN EXIT;
+
+      MESSAGE('%1, %2', HelloWorld.GetRandomGreeting(), Value);
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnBeforeSayHelloWorld@86400(VAR Handled@86400 : Boolean);
+    BEGIN
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnAfterSayHelloWorld@86401();
+    BEGIN
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

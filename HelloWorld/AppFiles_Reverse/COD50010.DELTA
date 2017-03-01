@@ -1,0 +1,21 @@
+OBJECT Modification "HW REG Integration"(Codeunit 50010)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=;
+    Time=;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    Target="HW REG Integration"(Codeunit 50010);
+    ChangeType=Deletion;
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

@@ -1,0 +1,21 @@
+OBJECT Modification "REG Registration Class"(Codeunit 86401)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=;
+    Time=;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    Target="REG Registration Class"(Codeunit 86401);
+    ChangeType=Deletion;
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

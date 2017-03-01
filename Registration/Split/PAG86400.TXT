@@ -1,0 +1,60 @@
+OBJECT Page 86400 REG Web Viewer
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=12:53:40;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    Editable=No;
+    CaptionML=ENU=Buy Subscription;
+  }
+  CONTROLS
+  {
+    { 86400;   ;Container ;
+                Name=Container;
+                ContainerType=ContentArea }
+
+    { 86401;1  ;Field     ;
+                Name=WebPageViewer;
+                ApplicationArea=#Basic,#Suite;
+                ControlAddIn=[Microsoft.Dynamics.Nav.Client.WebPageViewer;PublicKeyToken=31bf3856ad364e35] }
+
+  }
+  CODE
+  {
+    VAR
+      BuySubscriptionForwardLinkTxt@1001 : TextConst '@@@={Locked};ENU="https://go.microsoft.com/fwlink/?linkid=828659"';
+      CurrentUrl@86400 : Text;
+
+    PROCEDURE SetURL@86400(Value@86400 : Text);
+    BEGIN
+      CurrentUrl := Value;
+    END;
+
+    EVENT WebPageViewer@-86401::ControlAddInReady@8(callbackUrl@1000 : Text);
+    BEGIN
+      CurrPage.WebPageViewer.Navigate(CurrentUrl);
+    END;
+
+    EVENT WebPageViewer@-86401::DocumentReady@9();
+    BEGIN
+    END;
+
+    EVENT WebPageViewer@-86401::Callback@10(data@1000 : Text);
+    BEGIN
+    END;
+
+    EVENT WebPageViewer@-86401::Refresh@11(callbackUrl@1000 : Text);
+    BEGIN
+      CurrPage.WebPageViewer.Navigate(CurrentUrl);
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

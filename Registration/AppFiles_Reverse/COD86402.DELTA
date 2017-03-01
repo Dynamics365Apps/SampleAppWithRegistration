@@ -1,0 +1,21 @@
+OBJECT Modification "REG Access Level Enum"(Codeunit 86402)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=;
+    Time=;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    Target="REG Access Level Enum"(Codeunit 86402);
+    ChangeType=Deletion;
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

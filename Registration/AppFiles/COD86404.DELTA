@@ -1,0 +1,196 @@
+OBJECT Codeunit 86404 REG Rolcenter Events
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=12:53:06;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    [Integration]
+    LOCAL PROCEDURE OnOpenRoleCenter@86400();
+    BEGIN
+    END;
+
+    [EventSubscriber(Page,2500,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageExtensionsManagement@86401(VAR Rec@1000 : Record 2000000160);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,1310,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageO365Activities@86402(VAR Rec@1000 : Record 1313);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9030,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccountManagerActivities@86403(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9032,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccPayablesActivities@86404(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9034,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccReceivableActivities@86405(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9036,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageBookkeeperActivities@86406(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9037,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccountantActivities@86407(VAR Rec@1000 : Record 9054);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9038,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageProductionPlannerActivities@86408(VAR Rec@1000 : Record 9056);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9039,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageO365SalesActivities@86409(VAR Rec@1000 : Record 9069);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9041,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageShopSupervisorActivities@86410(VAR Rec@1000 : Record 9056);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9042,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageTeamMemberActivities@86411(VAR Rec@1000 : Record 9042);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9044,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageShopSuperBasicActivities@86412(VAR Rec@1000 : Record 9056);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9047,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageMachineOperatorActivities@86413(VAR Rec@1000 : Record 9056);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9050,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageWhseShipReceiveActivities@86414(VAR Rec@1000 : Record 9050);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9053,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageWMSShipReceiveActivities@86415(VAR Rec@1000 : Record 9051);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9056,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageWarehouseWorkerActivities@86416(VAR Rec@1000 : Record 9058);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9057,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageServiceDispatcherActivities@86417(VAR Rec@1000 : Record 9052);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9060,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageSOProcessorActivities@86418(VAR Rec@1000 : Record 9053);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9062,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageUserSecurityActivities@86419(VAR Rec@1000 : Record 9062);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9063,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPagePurchaseAgentActivities@86420(VAR Rec@1000 : Record 9055);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9066,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageServOutboundTechnicianAct@86421(VAR Rec@1000 : Record 9052);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9067,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageResourceManagerActivities@86422(VAR Rec@1000 : Record 9057);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9068,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageProjectManagerActivities@86423(VAR Rec@1000 : Record 9057);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9070,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageAccountingServicesActivities@86424(VAR Rec@1000 : Record 9070);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9072,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageITOperationsActivities@86425(VAR Rec@1000 : Record 9059);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9073,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageSmallBusinessOwnerAct@86426(VAR Rec@1000 : Record 9060);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9075,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageRapidStartServicesActivities@86427(VAR Rec@1000 : Record 9061);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    [EventSubscriber(Page,9076,OnOpenPageEvent)]
+    LOCAL PROCEDURE ShowNotificationOnOpenPageSalesRelationshipMgrAct@86428(VAR Rec@1000 : Record 9063);
+    BEGIN
+      OnOpenRoleCenter;
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

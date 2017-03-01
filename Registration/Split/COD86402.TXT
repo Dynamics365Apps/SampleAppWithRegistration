@@ -1,0 +1,38 @@
+OBJECT Codeunit 86402 REG Access Level Enum
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=12:54:31;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    PROCEDURE NoAccess@86400() : Integer;
+    BEGIN
+      EXIT(0);
+    END;
+
+    PROCEDURE LimitedAccess@86401() : Integer;
+    BEGIN
+      EXIT(1);
+    END;
+
+    PROCEDURE FullAccess@86402() : Integer;
+    BEGIN
+      EXIT(2);
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

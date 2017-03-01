@@ -1,0 +1,70 @@
+OBJECT Codeunit 86403 REG ShowPermissionNotification
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=12:54:16;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    PROCEDURE ShowPermissionsNotification@86400(AppID@86404 : GUID;NotificationMsg@86400 : Text;ActionText@86401 : Text;RedirectUrl@86402 : Text);
+    VAR
+      Handled@50000 : Boolean;
+    BEGIN
+      OnBeforeShowPermissionsNotification(AppID,NotificationMsg,ActionText,RedirectUrl,Handled);
+
+      DoShowPermissionsNotification(AppID,NotificationMsg,ActionText,RedirectUrl, Handled);
+
+      OnAfterShowPermissionsNotification(AppID,NotificationMsg,ActionText,RedirectUrl, Handled);
+    END;
+
+    LOCAL PROCEDURE DoShowPermissionsNotification@86401(AppID@86405 : GUID;NotificationMsg@86403 : Text;ActionText@86402 : Text;RedirectUrl@86401 : Text;VAR Handled@86400 : Boolean);
+    VAR
+      TheNotification@86404 : Notification;
+    BEGIN
+      IF Handled THEN EXIT;
+
+      WITH TheNotification DO BEGIN
+        ID := AppID;
+        MESSAGE := NotificationMsg;
+        SCOPE := NOTIFICATIONSCOPE::LocalScope;
+        IF ActionText <> '' THEN BEGIN
+          ADDACTION(ActionText,CODEUNIT::"REG ShowPermissionNotification",'HandleAction');
+          SETDATA('RedirectUrl', RedirectUrl);
+        END;
+        SEND;
+      END;
+    END;
+
+    PROCEDURE HandleAction@86402(TheNotification@1000 : Notification);
+    VAR
+      REGWebViewer@86400 : Page 86400;
+    BEGIN
+      REGWebViewer.SetURL(TheNotification.GETDATA('RedirectUrl'));
+      REGWebViewer.RUN;
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnBeforeShowPermissionsNotification@86403(AppID@86403 : GUID;NotificationMsg@86402 : Text;ActionText@86401 : Text;RedirectUrl@86400 : Text;VAR Handled@50000 : Boolean);
+    BEGIN
+    END;
+
+    [Integration]
+    LOCAL PROCEDURE OnAfterShowPermissionsNotification@86404(AppID@86404 : GUID;NotificationMsg@86403 : Text;ActionText@86402 : Text;RedirectUrl@86401 : Text;VAR Handled@86400 : Boolean);
+    BEGIN
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

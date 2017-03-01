@@ -1,0 +1,21 @@
+OBJECT Modification "REG Web Viewer"(Page 86400)
+{
+  OBJECT-PROPERTIES
+  {
+    Date=;
+    Time=;
+    Version List=;
+  }
+  PROPERTIES
+  {
+    Target="REG Web Viewer"(Page 86400);
+    ChangeType=Deletion;
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+

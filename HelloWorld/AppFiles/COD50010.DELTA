@@ -1,0 +1,69 @@
+OBJECT Codeunit 50010 HW REG Integration
+{
+  OBJECT-PROPERTIES
+  {
+    Date=01/03/17;
+    Time=15:37:39;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    OnRun=BEGIN
+          END;
+
+  }
+  CODE
+  {
+
+    [EventSubscriber(Codeunit,50002,OnBeforeSayHelloWorldCust)]
+    LOCAL PROCEDURE CheckAccessLevel_OnBeforeSayHelloWorldCust@86400(VAR Customer@86400 : Record 18;VAR Handled@86401 : Boolean);
+    VAR
+      REGRegistrationClass@86402 : Codeunit 86401;
+      REGAccessLevelEnum@86404 : Codeunit 86402;
+    BEGIN
+      IF NOT REGRegistrationClass.CheckCurrentAccessLevel(GetAppId, GetAppRegHost, REGAccessLevelEnum.LimitedAccess, TRUE) THEN BEGIN
+        Handled := TRUE;
+      END;
+    END;
+
+    [EventSubscriber(Codeunit,50002,OnBeforeSayHelloWorldVend)]
+    LOCAL PROCEDURE CheckAccessLevel_OnBeforeSayHelloWorldVend@86401(VAR Vendor@86400 : Record 23;VAR Handled@86401 : Boolean);
+    VAR
+      REGRegistrationClass@86402 : Codeunit 86401;
+      REGAccessLevelEnum@86404 : Codeunit 86402;
+    BEGIN
+      IF NOT REGRegistrationClass.CheckCurrentAccessLevel(GetAppId, GetAppRegHost, REGAccessLevelEnum.FullAccess, TRUE) THEN BEGIN
+        Handled := TRUE;
+      END;
+    END;
+
+    [EventSubscriber(Codeunit,86404,OnOpenRoleCenter)]
+    LOCAL PROCEDURE ShowNotification_OnOpenRoleCenter@86403();
+    VAR
+      REGRegistrationClass@86401 : Codeunit 86401;
+      HWHelloWorld@86402 : Record 50000;
+      REGAccessLevelEnum@86400 : Codeunit 86402;
+    BEGIN
+      REGRegistrationClass.CheckCurrentAccessLevel(GetAppId, GetAppRegHost, REGAccessLevelEnum.LimitedAccess, TRUE);
+    END;
+
+    LOCAL PROCEDURE GetAppRegHost@86404() URL : Text;
+    BEGIN
+      URL := 'https://hwdemoreg.azurewebsites.net/';
+    END;
+
+    LOCAL PROCEDURE GetAppID@50000() : GUID;
+    VAR
+      HWHelloWorld@50000 : Record 50000;
+    BEGIN
+      EXIt(HWHelloWorld.GetAppId);
+      //you could also just the GUID of your app here:
+      //EXIT('{91af0412-5efc-4d1a-a988-efb5f4fd9c9d}');
+    END;
+
+    BEGIN
+    END.
+  }
+}
+

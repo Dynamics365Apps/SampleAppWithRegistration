@@ -1,0 +1,49 @@
+OBJECT Page 50000 HW Hello Worlds
+{
+  OBJECT-PROPERTIES
+  {
+    Date=24/02/17;
+    Time=13:22:34;
+    Modified=Yes;
+    Version List=HelloWorld;
+  }
+  PROPERTIES
+  {
+    SourceTable=Table50000;
+    PageType=List;
+  }
+  CONTROLS
+  {
+    { 1   ;0   ;Container ;
+                ContainerType=ContentArea }
+
+    { 2   ;1   ;Group     ;
+                Name=Group;
+                GroupType=Repeater }
+
+    { 3   ;2   ;Field     ;
+                SourceExpr=Language }
+
+    { 4   ;2   ;Field     ;
+                SourceExpr="Hello World" }
+
+    { 5   ;0   ;Container ;
+                ContainerType=FactBoxArea }
+
+    { 6   ;1   ;Part      ;
+                PartType=System;
+                SystemPartID=Notes }
+
+    { 7   ;1   ;Part      ;
+                PartType=System;
+                SystemPartID=RecordLinks }
+
+  }
+  CODE
+  {
+
+    BEGIN
+    END.
+  }
+}
+
