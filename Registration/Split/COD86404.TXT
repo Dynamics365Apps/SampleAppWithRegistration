@@ -1,4 +1,4 @@
-OBJECT Codeunit 86404 REG Rolcenter Events
+OBJECT Codeunit 86404 REG Role Center Events
 {
   OBJECT-PROPERTIES
   {
