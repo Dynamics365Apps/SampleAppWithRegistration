@@ -106,8 +106,8 @@ OBJECT Codeunit 86401 REG Registration Class
 
     LOCAL PROCEDURE GetAppRegParameters@86405() Params : Text;
     BEGIN
-      Params := '?tenantid=%1&appid=%2&companyname=%3&numberusers=%4&isevaluationcompany=%5';
-      Params := STRSUBSTNO(Params,GetTenantId,CurrentAppId,GetEncodedCompanyName,GetNumberOfActiveUsers,FORMAT(IsEvaluationCompany,0,2));
+      Params := '?tenantid=%1&appid=%2&numberusers=%3&isevaluationcompany=%4';
+      Params := STRSUBSTNO(Params,GetTenantId,CurrentAppId,GetNumberOfActiveUsers,FORMAT(IsEvaluationCompany,0,2));
     END;
 
     LOCAL PROCEDURE GetTenantId@86406() : Text;
@@ -118,13 +118,6 @@ OBJECT Codeunit 86401 REG Registration Class
       Url := GETURL(CLIENTTYPE::Web);
       Uri := Uri.Uri(Url);
       EXIT(Uri.Host);
-    END;
-
-    LOCAL PROCEDURE GetEncodedCompanyName@86407() : Text;
-    VAR
-      SystemWebHttpUtility@50000 : DotNet "'System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.System.Web.HttpUtility";
-    BEGIN
-      EXIT(SystemWebHttpUtility.UrlEncode(COMPANYNAME));
     END;
 
     LOCAL PROCEDURE GetNumberOfActiveUsers@86408() : Integer;
